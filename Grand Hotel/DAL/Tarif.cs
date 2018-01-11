@@ -11,14 +11,14 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Tarif
     {
-        public Tarif()
-        {
-            this.Chambre = new HashSet<Chambre>();
-        }
+
+
     
+        [Key]
         public string Code { get; set; }
         public System.DateTime DateDebut { get; set; }
         public decimal Prix { get; set; }

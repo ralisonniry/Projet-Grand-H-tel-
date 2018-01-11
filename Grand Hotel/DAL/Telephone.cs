@@ -11,10 +11,14 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Telephone
     {
+        [Key]
         public string Numero { get; set; }
+        [ForeignKey("Client")]
         public int IdClient { get; set; }
         public string CodeType { get; set; }
         public bool Pro { get; set; }

@@ -11,15 +11,12 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Chambre
+    using System.ComponentModel.DataAnnotations;
+
+    public class Chambre
     {
-        public Chambre()
-        {
-            this.Reservation = new HashSet<Reservation>();
-            this.Tarif = new HashSet<Tarif>();
-        }
-    
+
+        [Key]
         public short Numero { get; set; }
         public byte Etage { get; set; }
         public bool Bain { get; set; }

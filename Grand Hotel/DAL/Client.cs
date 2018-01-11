@@ -11,17 +11,12 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public class Client
     {
-        public Client()
-        {
-            this.Email = new HashSet<Email>();
-            this.Facture = new HashSet<Facture>();
-            this.Reservation = new HashSet<Reservation>();
-            this.Telephone = new HashSet<Telephone>();
-        }
-    
+
+        [Key]
         public int Id { get; set; }
         public string Civilite { get; set; }
         public string Nom { get; set; }
