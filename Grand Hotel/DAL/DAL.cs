@@ -18,7 +18,18 @@ namespace DAL
 
         public static Adresse ChercheAdresseClient(int id)
         {
-            throw new NotImplementedException();
+            return DonneesClient.Instance.GetAddress(id);
+        }
+
+        public static List<Telephone> GetTelephone(int id)
+        {
+            return DonneesClient.Instance.GetTel(id);
+
+        }
+
+        public static List<Email> GetEmail(int id)
+        {
+            return DonneesClient.Instance.GetMail(id);
         }
     }
 
@@ -57,8 +68,9 @@ namespace DAL
 
         #region Dbset
         public DbSet<Client> DClient { get; set; }
-
-
+        public DbSet<Telephone> DTelephone { get; set; }
+        public DbSet<Adresse> DAdresse { get; set; }
+        public DbSet<Email> DEmail { get; set; }
 
         #endregion
 
@@ -68,33 +80,26 @@ namespace DAL
         // Charge la lsite des clients
         public List<DAL.Client> AfficheListe()
         {
-            var listeclient = DClient.ToList();
-            List<DAL.Client> liste = new List<Client>();
+            return DClient.ToList();
+        }
 
-            foreach(var c in listeclient)
-            {
-                DAL.Client client1 = new Client();
+        // regarde en local l'adresse du client id
+        public Adresse GetAddress(int id)
+        {
+            return DAdresse.Local.Where(a => a.IdClient == id).FirstOrDefault();
+        }
 
-                client1.Id = c.Id;
-                client1.Nom = c.Nom;
-                client1.Prenom = c.Prenom;
-                client1.CarteFidelite = c.CarteFidelite;
-                client1.Societe = c.Societe;
-                client1.Civilite = c.Civilite;
+        // regarde en local le tel du client id
+        public List<Telephone> GetTel(int id)
+        {
+            return DTelephone.Local.Where(t=> t.IdClient == id).ToList();
+        }
 
-                liste.Add(client1);
-
-            }
-
-            return liste;
-
-        }               
-
-
-
-
-
-
+        // regarde en local le mail du client id
+        internal List<Email> GetMail(int id)
+        {
+            return DEmail.Local.Where(t => t.IdClient == id).ToList();
+        }
     }
 
 

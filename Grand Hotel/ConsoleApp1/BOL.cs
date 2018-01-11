@@ -39,7 +39,7 @@ namespace BOL
 
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
-        public static AdresseBOL GetCLient(int id)
+        public static AdresseBOL GetAdresse(int id)
         {
             DAL.Adresse adresse = BDD.ChercheAdresseClient(id);
             AdresseBOL adressebol = new AdresseBOL();
@@ -49,9 +49,44 @@ namespace BOL
             adressebol.Ville = adresse.Ville;
 
             return adressebol;
-
         }
 
+        // Cherche le client selon l'id et envoie l'adresse de ce dernier
+        public static List<TelephoneBOL> GetTel(int id)
+        {
+            List<DAL.Telephone> liste = BDD.GetTelephone(id);
+            List<TelephoneBOL> listeBOL = new List<TelephoneBOL>();
+
+            foreach (var c in liste)
+            {
+                TelephoneBOL tel1 = new TelephoneBOL();
+                tel1.Numero = c.Numero;
+                tel1.Pro = c.Pro;
+                tel1.CodeType = c.CodeType;
+
+                listeBOL.Add(tel1);
+            }
+
+            return listeBOL;
+        }
+
+        // Cherche le client selon l'id et envoie l'adresse de ce dernier
+        public static object GetEmail(int id)
+        {
+            List<DAL.Email> liste = BDD.GetEmail(id);
+            List<EmailBOL> listeBOL = new List<EmailBOL>();
+
+            foreach (var c in liste)
+            {
+                EmailBOL o1 = new EmailBOL();
+                o1.AdresseMail = c.Adresse;
+                o1.Pro = c.Pro;
+
+                listeBOL.Add(o1);
+            }
+
+            return listeBOL;
+        }
 
 
 
