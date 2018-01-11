@@ -90,20 +90,45 @@ namespace BOL
 
 
         // Enregistre le client dans la BDD
-        public static bool Enregister(ClientBOL client1)
+        public static bool Enregister(ClientBOL c)
         {
-            Client c = new Client();
+            Client client1 = new Client
+            {
+                Id = c.Id,
+                Nom = c.Nom,
+                Prenom = c.Prenom,
+                CarteFidelite = c.CarteFidelite,
+                Societe = c.Societe,
+                Civilite = c.Civilite
+            };
 
-            client1.Id = c.Id;
-            client1.Nom = c.Nom;
-            client1.Prenom = c.Prenom;
-            client1.CarteFidelite = c.CarteFidelite;
-            client1.Societe = c.Societe;
-            client1.Civilite = c.Civilite;
-
-            return BDD.EnregistreClient(c);
+            return BDD.EnregistreClient(client1);
         }
 
+        public static bool Enregister(AdresseBOL adresse)
+        {
+            Adresse adressebol = new Adresse
+            {
+                Rue = adresse.RueEtComplement,
+                CodePostal = adresse.CodePostal,
+                Ville = adresse.Ville
+            };
 
+            return BDD.EnregistreAdresse(adressebol);
+
+        }
+
+        public static bool Enregister(TelephoneBOL c)
+        {
+            Telephone tele = new Telephone
+            {
+                 Numero = c.Numero,
+                 Pro = c.Pro,
+                 CodeType = c.CodeType
+               
+        };
+
+            return BDD.EnregistreAdresse(tele);
+        }
     }
 }
