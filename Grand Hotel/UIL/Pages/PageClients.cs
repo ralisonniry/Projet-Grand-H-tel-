@@ -104,12 +104,9 @@ namespace UIL
             if (choix == "O")
             {
                 Output.WriteLine("Veuillez saisir les informations suivantes :");
-
-               // ad.RueEtComplement = Input.Read<string>("Rue et complément :");
+                ad.RueEtComplement = Input.Read<string>("Rue et complément :");
                 ad.CodePostal = Input.Read<string>("Code Postal:");
                 ad.Ville = Input.Read<string>("Ville :");
-
-
 
             }
             else if (choix == "N")
