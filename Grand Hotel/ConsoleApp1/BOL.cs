@@ -161,7 +161,7 @@ namespace BOL
 
         public static void SupprimerCLient(int id)
         {
-            throw new NotImplementedException();
+            BDD.SupprimerLeClient(id);
         }
     }
 }
