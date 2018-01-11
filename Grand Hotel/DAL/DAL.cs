@@ -8,7 +8,7 @@ namespace DAL
 {
     public static class BDD
     {
-        public static List<CLient> AfficheListeClient()
+        public static List<Client> AfficheListeClient()
         {
             throw new NotImplementedException();
         }

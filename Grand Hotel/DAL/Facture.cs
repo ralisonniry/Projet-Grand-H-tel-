@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BOL
 {
 
-    public class FactureBOL
+    public class Facture
     {
         public int Id { get; set; }
         public int IdClient { get; set; }
@@ -15,13 +15,13 @@ namespace BOL
         public DateTime DatePaiement { get; set; }
         public string CodeModePaiement { get; set; }        // peut etre nul
 
-        public List<LigneFactureBOL> ListeFacture { get; set; }
+        public List<LigneFacture> ListeFacture { get; set; }
 
     }
 
 
 
-    public class LigneFactureBOL
+    public class LigneFacture
     {
         public int NumLigne { get; set; }
         public int Quantite { get; set; }

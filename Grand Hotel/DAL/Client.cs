@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BOL
 {
 
-    public class ClientBOL
+    public class Client
     {
 
         public int Id { get; set; }
@@ -17,8 +17,8 @@ namespace BOL
         public bool CarteFidelite { get; set; }     // 0 = pas de carte  /  1  = carte de fidelité
         public string Societe { get; set; }
 
-        public List<TelephoneBOL> ListeTel { get; set; }   // peut etre null
-        public List<EmailBOL> ListeEmail { get; set; }     // peut etre null
+        public List<Telephone> ListeTel { get; set; }   // peut etre null
+        public List<Email> ListeEmail { get; set; }     // peut etre null
         public Adresse Adresse { get; set; }            // une seule adresse
 
         
@@ -26,7 +26,7 @@ namespace BOL
     }
 
 
-    public class TelephoneBOL
+    public class Telephone
     {
         public string Numero { get; set; }
         public int IdClient { get; set; }
@@ -35,14 +35,14 @@ namespace BOL
 
     }
 
-    public class AdresseBOL
+    public class Adresse
     {
         public string RueEtComplement { get; set; }
         public string CodePostal { get; set; }
         public string Ville { get; set; }
     }
 
-    public class EmailBOL
+    public class Email
     {
 
         public string AdresseMail { get; set; }
