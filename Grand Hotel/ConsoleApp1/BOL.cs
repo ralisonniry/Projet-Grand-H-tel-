@@ -17,12 +17,9 @@ namespace BOL
 
 
 
-        public static List<string> GetClients()
+        public static List<DAL.Client> GetClients()
         {
-            List<string> liste = BDD.AfficheListeClient();
-
-
-
+            List<DAL.Client> liste = BDD.AfficheListeClient();
             return liste;
         }
 
