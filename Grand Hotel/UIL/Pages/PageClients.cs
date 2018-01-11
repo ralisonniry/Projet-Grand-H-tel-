@@ -147,7 +147,7 @@ namespace UIL
 
                 //Enregistrement
                 if (!Metier.Enregister(tel))
-                    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+                    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau teléphone avec succès");
                 else
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
             }
