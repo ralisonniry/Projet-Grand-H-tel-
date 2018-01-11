@@ -42,16 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entités\Client.cs" />
-    <Compile Include="Entités\Facture.cs" />
     <Compile Include="GrandHotelApp.cs" />
     <Compile Include="Pages\PageClients.cs" />
     <Compile Include="Pages\PageFactures.cs" />
     <Compile Include="Pages\PageResultats.cs" />
     <Compile Include="Pages\PageAccueil.cs" />
-    <Compile Include="Entités\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entités\Reservation.cs" />
     <Compile Include="Properties\Settings1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -75,6 +72,10 @@
     <ProjectReference Include="..\ConsoleApp1\BOL.csproj">
       <Project>{BD3F45F1-BAA1-4EB0-875C-19486BAA968F}</Project>
       <Name>BOL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{242371ff-16e1-43d9-843e-8a18a8ef2376}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

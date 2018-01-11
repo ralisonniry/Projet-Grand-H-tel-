@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL;
 
 namespace UIL
 
@@ -12,7 +13,7 @@ namespace UIL
 {
     class PageClients : MenuPage
     {
-        private IList<string> _clients;
+        private IList<DAL.Client> _clients;
         private object _client;
         public PageClients() : base("Page Clients")
         {
