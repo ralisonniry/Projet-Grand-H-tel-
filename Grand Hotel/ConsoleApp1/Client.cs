@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BOL
 {
 
-    internal class Client
+    public class Client
     {
 
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace BOL
     }
 
 
-    internal class Telephone
+    public class Telephone
     {
         public string Numero { get; set; }
         public int IdClient { get; set; }
@@ -35,14 +35,14 @@ namespace BOL
 
     }
 
-    internal class Adresse
+    public class Adresse
     {
         public string RueEtComplement { get; set; }
         public string CodePostal { get; set; }
         public string Ville { get; set; }
     }
 
-    internal class Email
+    public class Email
     {
 
         public string AdresseMail { get; set; }

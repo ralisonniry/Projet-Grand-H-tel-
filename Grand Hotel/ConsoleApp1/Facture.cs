@@ -7,27 +7,27 @@ using System.Threading.Tasks;
 namespace BOL
 {
 
-    internal class Facture
+    public class Facture
     {
-        internal int Id { get; set; }
-        internal int IdClient { get; set; }
-        internal DateTime Datefacture { get; set; }
-        internal DateTime DatePaiement { get; set; }
-        internal string CodeModePaiement { get; set; }        // peut etre nul
+        public int Id { get; set; }
+        public int IdClient { get; set; }
+        public DateTime Datefacture { get; set; }
+        public DateTime DatePaiement { get; set; }
+        public string CodeModePaiement { get; set; }        // peut etre nul
 
-        internal List<LigneFacture> ListeFacture { get; set; }
+        public List<LigneFacture> ListeFacture { get; set; }
 
     }
 
 
 
-    internal class LigneFacture
+    public class LigneFacture
     {
-        internal int NumLigne { get; set; }
-        internal int Quantite { get; set; }
-        internal decimal MontantHT { get; set; }
-        internal decimal TauxTVA { get; set; }
-        internal decimal TauxReduction { get; set; }
+        public int NumLigne { get; set; }
+        public int Quantite { get; set; }
+        public decimal MontantHT { get; set; }
+        public decimal TauxTVA { get; set; }
+        public decimal TauxReduction { get; set; }
     }
 
 }

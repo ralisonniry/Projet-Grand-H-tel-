@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BOL
 {
-    internal class Reservation
+    public class Reservation
     {
         public int IdClient { get; set; }       // Id du client proprietaire de la facture -> permet de trouver la facture selon le client
         public DateTime Jour { get; set; }      // Jour de la reservation
@@ -20,7 +20,7 @@ namespace BOL
 
 
 
-    internal class Chambre
+    public class Chambre
     {
         public int Numero { get; set; }
         public int Etage { get; set; }
