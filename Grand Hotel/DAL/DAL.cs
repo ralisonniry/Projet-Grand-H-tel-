@@ -16,16 +16,18 @@ namespace DAL
             return DonneesClient.Instance.AfficheListe();
         }
 
-
-
-
-
-
+        public static Adresse ChercheAdresseClient(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
     public class DonneesClient : DbContext
     {
+
+
+        #region instance
         private static DonneesClient _instance;
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -51,6 +53,8 @@ namespace DAL
 
         }           // pour instance unique de Donnees Clients
 
+        #endregion
+
         #region Dbset
         public DbSet<Client> DClient { get; set; }
 
@@ -61,15 +65,30 @@ namespace DAL
 
 
 
-
+        // Charge la lsite des clients
         public List<DAL.Client> AfficheListe()
         {
-            var liste = DClient.ToList();
+            var listeclient = DClient.ToList();
+            List<DAL.Client> liste = new List<Client>();
+
+            foreach(var c in listeclient)
+            {
+                DAL.Client client1 = new Client();
+
+                client1.Id = c.Id;
+                client1.Nom = c.Nom;
+                client1.Prenom = c.Prenom;
+                client1.CarteFidelite = c.CarteFidelite;
+                client1.Societe = c.Societe;
+                client1.Civilite = c.Civilite;
+
+                liste.Add(client1);
+
+            }
 
             return liste;
 
-        }
-
+        }               
 
 
 

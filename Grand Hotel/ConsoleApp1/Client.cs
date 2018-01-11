@@ -14,14 +14,8 @@ namespace BOL
         public string Civilite { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public bool CarteFidelite { get; set; }     // 0 = pas de carte  /  1  = carte de fidelité
+        public bool CarteFidelite { get; set; }    
         public string Societe { get; set; }
-
-        public List<TelephoneBOL> ListeTel { get; set; }   // peut etre null
-        public List<EmailBOL> ListeEmail { get; set; }     // peut etre null
-        public AdresseBOL Adresse { get; set; }            // une seule adresse
-
-        
 
     }
 
