@@ -86,19 +86,19 @@ namespace DAL
         // regarde en local l'adresse du client id
         public Adresse GetAddress(int id)
         {
-            return DAdresse.Local.Where(a => a.IdClient == id).FirstOrDefault();
+            return DAdresse.Where(a => a.IdClient == id).FirstOrDefault();
         }
 
         // regarde en local le tel du client id
         public List<Telephone> GetTel(int id)
         {
-            return DTelephone.Local.Where(t=> t.IdClient == id).ToList();
+            return DTelephone.Where(t=> t.IdClient == id).ToList();
         }
 
         // regarde en local le mail du client id
         internal List<Email> GetMail(int id)
         {
-            return DEmail.Local.Where(t => t.IdClient == id).ToList();
+            return DEmail.Where(t => t.IdClient == id).ToList();
         }
     }
 

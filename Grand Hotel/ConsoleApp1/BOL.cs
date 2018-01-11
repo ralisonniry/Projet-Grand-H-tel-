@@ -71,7 +71,7 @@ namespace BOL
         }
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
-        public static object GetEmail(int id)
+        public static List<EmailBOL> GetEmail(int id)
         {
             List<DAL.Email> liste = BDD.GetEmail(id);
             List<EmailBOL> listeBOL = new List<EmailBOL>();
@@ -90,7 +90,7 @@ namespace BOL
 
 
 
-        public static bool Enregister(Client cli)
+        public static bool Enregister(ClientBOL cli)
         {
             throw new NotImplementedException();
         }
