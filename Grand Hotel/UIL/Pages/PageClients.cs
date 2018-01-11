@@ -23,6 +23,7 @@ namespace UIL
             Menu.AddOption("3", "Saisir un nouveau client", SaisirClient);
             Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
             Menu.AddOption("5", "Supprimer un client", SupClient);
+
         }
 
 
@@ -132,8 +133,8 @@ namespace UIL
         public void ModifClient()
         {
             //Saisie Identifiant Client
-            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
-            string saisieId = Console.ReadLine();
+
+            int saisieId = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
 
             //Saisie N° de teléphone 
             Output.WriteLine("Voulez-vous entrer un N° de teléphone : O/N");
