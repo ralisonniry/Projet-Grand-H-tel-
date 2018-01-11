@@ -160,7 +160,7 @@ namespace UIL
                         Output.WriteLine("Erreur de saisie!");
                         break;
                 }
-                tel.Pro= Input.Read<bool>("Teléphone professionnel: Oui (0) ou Non (1)");
+                tel.Pro= Input.Read<bool>("Teléphone professionnel?: Oui (True) ou Non (False)");
 
                 //Enregistrement teléphone
                 if (Metier.Enregister(tel, saisieId))
@@ -183,7 +183,7 @@ namespace UIL
                 Output.WriteLine("Veuillez saisir l'email :");
                 EmailBOL em = new EmailBOL();
                 em.AdresseMail = Input.Read<string>("Email :");
-                em.Pro= Input.Read<bool>("Teléphone professionnel: Oui (0) ou Non (1)");
+                em.Pro= Input.Read<bool>("Adresse Email professionnel?: Oui (True) ou Non (False)");
 
 
                 //Enregistrement Email
