@@ -144,6 +144,8 @@ namespace UIL
                 Output.WriteLine("Veuillez saisir le numero de téléphone :");
                 TelephoneBOL tel = new TelephoneBOL();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
+                tel.CodeType= Input.Read<string>("Fixe (F) ou Mobile (M) :");
+                tel.Pro= Input.Read<bool>("Teléphone professionnel: Oui (0) ou Non (1)");
 
                 //Enregistrement teléphone
                 if (Metier.Enregister(tel, saisieId))
@@ -166,6 +168,8 @@ namespace UIL
                 Output.WriteLine("Veuillez saisir l'email :");
                 EmailBOL em = new EmailBOL();
                 em.AdresseMail = Input.Read<string>("Email :");
+                em.Pro= Input.Read<bool>("Teléphone professionnel: Oui (0) ou Non (1)");
+
 
                 //Enregistrement Email
                 if (Metier.Enregister(em, saisieId))
