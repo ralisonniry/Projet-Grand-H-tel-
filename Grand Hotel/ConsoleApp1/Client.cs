@@ -21,6 +21,8 @@ namespace BOL
         public List<Email> ListeEmail { get; set; }     // peut etre null
         public Adresse Adresse { get; set; }            // une seule adresse
 
+        
+
     }
 
 
