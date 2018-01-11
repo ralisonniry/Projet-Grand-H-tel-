@@ -89,10 +89,19 @@ namespace BOL
         }
 
 
-
-        public static bool Enregister(ClientBOL cli)
+        // Enregistre le client dans la BDD
+        public static bool Enregister(ClientBOL client1)
         {
-            throw new NotImplementedException();
+            Client c = new Client();
+
+            client1.Id = c.Id;
+            client1.Nom = c.Nom;
+            client1.Prenom = c.Prenom;
+            client1.CarteFidelite = c.CarteFidelite;
+            client1.Societe = c.Societe;
+            client1.Civilite = c.Civilite;
+
+            return BDD.EnregistreClient(c);
         }
 
 

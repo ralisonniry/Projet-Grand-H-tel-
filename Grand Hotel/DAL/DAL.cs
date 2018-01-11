@@ -31,6 +31,15 @@ namespace DAL
         {
             return DonneesClient.Instance.GetMail(id);
         }
+
+
+
+        public static bool EnregistreClient(Client c)
+        {
+            return DonneesClient.Instance.SaveClient(c);
+        }
+
+
     }
 
 
@@ -100,6 +109,25 @@ namespace DAL
         {
             return DEmail.Where(t => t.IdClient == id).ToList();
         }
+
+        // Enregistre le client id dans la BDD
+        internal bool SaveClient(Client c)
+        {
+            try
+            {
+                DClient.Add(c);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
+
     }
 
 
