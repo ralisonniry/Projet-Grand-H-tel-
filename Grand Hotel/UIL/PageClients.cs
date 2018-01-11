@@ -29,7 +29,11 @@ namespace UIL
             cli.Nom= Input.Read<string>("Nom :");
             cli.Prenom= Input.Read<string>("Prenom");
             cli.CarteFidelite= Input.Read<bool>("0 (Non) ou 1 (Oui) :");
-            cli.Societe= Input.Read<string>("Nom ou NULL si ");
+            cli.Societe= Input.Read<string>("Nom (si renseigné) :");
+            Adresse ad = new Adresse();
+            ad.RueEtComplement= Input.Read<string>("Rue et complément :");
+            ad.CodePostal= Input.Read<string>("Code Postal:");
+            ad.Ville= Input.Read<string>("Ville :");
         }
 
         private void InfoClient()
