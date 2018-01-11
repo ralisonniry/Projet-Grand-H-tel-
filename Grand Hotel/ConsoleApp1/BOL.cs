@@ -128,7 +128,38 @@ namespace BOL
                
         };
 
-            return BDD.EnregistreAdresse(tele);
+            return BDD.EnregistreTelephone(tele);
         }
+
+        public static bool Enregister(TelephoneBOL c, int saisieId)      
+        {
+            Telephone tele = new Telephone
+            {
+                Numero = c.Numero,
+                Pro = c.Pro,
+                CodeType = c.CodeType,
+                IdClient = saisieId
+
+            };
+
+            return BDD.EnregistreTelephone(tele);
+        }
+
+        public static bool Enregister(EmailBOL em, int saisieId)
+        {
+            Email email = new Email
+            {
+                Adresse = em.AdresseMail,
+                IdClient = saisieId,
+                Pro = em.Pro
+
+
+            };
+
+            return BDD.EnregistreEmail(email);
+        }
+
+
+
     }
 }
