@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entités\Client.cs" />
-    <Compile Include="ContexteBOL.cs" />
     <Compile Include="Entités\Facture.cs" />
     <Compile Include="GrandHotelApp.cs" />
     <Compile Include="Pages\PageClients.cs" />
