@@ -19,20 +19,26 @@ namespace UIL
             Menu.AddOption("1", "Liste des cLients", AfficherClients);
             Menu.AddOption("2", "Coordonnées du client", InfoClient);
             Menu.AddOption("3", "Saisir un nouveau client", SaisirClient);
+            Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
+
         }
+
+
         //-----------------------------------------------------------------------------
         //1-Affichage de la liste des clients
-        private void AfficherClients()
+        public void AfficherClients()
         {
             _clients = Metier.GetClients();
             ConsoleTable.From(_clients).Display("Clients");
         }
 
         //----------------------------------------------------------------------
-        //2-Coordonnées du client
-        private void InfoClient()
+        //2-Afficher Coordonnées du client 
+        public void InfoClient()
         {
-            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client pour ses coordonnées: ");
+            //Saisie Identifiant Client
+            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client : ");
+            string saisieId = Console.ReadLine();
             _client = (Client)Metier.GetCLient(Id);
 
             List<Client> Clientliste = new List<Client>();
@@ -43,7 +49,7 @@ namespace UIL
         }
         //----------------------------------------------------------------------
         //3-Saisir un nouveau client
-        private void SaisirClient()
+        public void SaisirClient()
         {
             Output.WriteLine("Voulez-vous entrer un nouveau client : \n1.Oui \n2.Non");
             string saisieClient = Console.ReadLine();
@@ -75,6 +81,7 @@ namespace UIL
             string choix = Console.ReadLine();
             if (choix == "O")
             {
+                Output.WriteLine("Veuillez saisir les informations suivantes :");
                 Adresse ad = new Adresse();
                 ad.RueEtComplement = Input.Read<string>("Rue et complément :");
                 ad.CodePostal = Input.Read<string>("Code Postal:");
@@ -83,11 +90,34 @@ namespace UIL
             }
             else Enregister();
 
+            Metier.Enregister();
+
             if (!Enregister())
                 Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
         }
+        //----------------------------------------------------------------------
+        //4-Ajouter un N° de téléphone ou une adresse email
+        public void ModifClient()
+        {
+            //Saisie Identifiant Client
+            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
+            string saisieId = Console.ReadLine();
+            _client = (Client)Metier.GetCLient(Id);
+
+
+            Output.WriteLine("Voulez-vous entrer : \n1. un N° de téléphone \n2. un email");
+            string choix = Console.ReadLine();
+
+            if (choix == "1")
+            {
+                Output.WriteLine("Veuillez saisir le numero de téléphone :");
+                Telephone tel = new Telephone();
+                tel.Numero= Input.Read<string>("Numero de téléphone :");
+            }
+        }
+
 
     }
 }
