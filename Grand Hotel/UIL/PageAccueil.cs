@@ -9,7 +9,7 @@ namespace UIL
 {
     class PageAccueil : MenuPage
     {
-        public PageAccueil() : base("Acceuil", false)
+        public PageAccueil() : base("Accueil", false)
         {
             Menu.AddOption("0", "Quitter l'application",
                 () => Environment.Exit(0));
