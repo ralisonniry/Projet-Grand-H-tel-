@@ -12,8 +12,8 @@ namespace UIL
 {
     class PageClients : MenuPage
     {
-        private IList<Client> _clients;
-        private Client _client;
+        private IList<string> _clients;
+        private object _client;
         public PageClients() : base("Page Clients")
         {
             Menu.AddOption("1", "Liste des cLients", AfficherClients);
@@ -29,7 +29,7 @@ namespace UIL
         public void AfficherClients()
         {
             _clients = Metier.GetClients();
-            ConsoleTable.From(_clients).Display("Clients");
+            ConsoleTable.From(_clients, "clients").Display("Clients");
         }
 
         //----------------------------------------------------------------------
@@ -39,10 +39,12 @@ namespace UIL
             //Saisie Identifiant Client
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client : ");
             string saisieId = Console.ReadLine();
-            _client = (Client)Metier.GetCLient(Id);
+            _client = Metier.GetCLient(Id);
+
+            
 
             List<Client> Clientliste = new List<Client>();
-            Clientliste.Add(_client);
+            //Clientliste.Add(_client);
 
 
             ConsoleTable.From(Clientliste).Display("Coordonnées client: ");
@@ -87,12 +89,23 @@ namespace UIL
                 ad.CodePostal = Input.Read<string>("Code Postal:");
                 ad.Ville = Input.Read<string>("Ville :");
 
+
+
             }
-            else Enregister();
+            else if (choix == "N")
+            {
 
-            Metier.Enregister();
 
-            if (!Enregister())
+            }
+            else
+            {
+
+                //erreur
+            }
+
+            
+
+            if (!Metier.Enregister(cli))
                 Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");

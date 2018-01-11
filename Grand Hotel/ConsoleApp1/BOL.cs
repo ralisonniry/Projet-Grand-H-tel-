@@ -26,12 +26,22 @@ namespace BOL
             return liste;
         }
 
-       // public static ClientBOL GetId(int id)
-       // {
-           // ClientBOL client =  BDD.GetClient(id);
+        public static object GetCLient(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-           // return client;
-       // }
+        public static void Enregister(object cli)
+        {
+            throw new NotImplementedException();
+        }
+
+        // public static ClientBOL GetId(int id)
+        // {
+        // ClientBOL client =  BDD.GetClient(id);
+
+        // return client;
+        // }
     }
 
 
