@@ -42,15 +42,13 @@ namespace BOL
         public static AdresseBOL GetCLient(int id)
         {
             DAL.Adresse adresse = BDD.ChercheAdresseClient(id);
-            ClientBOL adressebol = new ClientBOL();
+            AdresseBOL adressebol = new AdresseBOL();
 
-
+            adressebol.RueEtComplement = adresse.Rue + "\t" + adresse.Complement;
+            adressebol.CodePostal = adresse.CodePostal;
+            adressebol.Ville = adresse.Ville;
 
             return adressebol;
-            
-
-
-
 
         }
 
