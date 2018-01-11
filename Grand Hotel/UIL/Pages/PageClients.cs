@@ -30,11 +30,16 @@ namespace UIL
             cli.Prenom= Input.Read<string>("Prenom");
             cli.CarteFidelite= Input.Read<bool>("0 (Non) ou 1 (Oui) :");
             cli.Societe= Input.Read<string>("Nom (si renseigné) :");
-            Output.WriteLine("Voulez-vous entrer l'adresse du nouveau client :");
-            Adresse ad = new Adresse();
-            ad.RueEtComplement= Input.Read<string>("Rue et complément :");
-            ad.CodePostal= Input.Read<string>("Code Postal:");
-            ad.Ville= Input.Read<string>("Ville :");
+            Output.WriteLine("Voulez-vous entrer l'adresse du nouveau client : O/N");
+            string choix = Console.ReadLine();
+            if (choix=="O")
+            {
+                Adresse ad = new Adresse();
+                ad.RueEtComplement = Input.Read<string>("Rue et complément :");
+                ad.CodePostal = Input.Read<string>("Code Postal:");
+                ad.Ville = Input.Read<string>("Ville :");
+            }
+            else Enregister();
         }
 
         private void InfoClient()
