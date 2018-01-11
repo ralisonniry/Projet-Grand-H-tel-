@@ -64,7 +64,7 @@ namespace DAL
 
         public List<DAL.Client> AfficheListe()
         {
-            var liste = DClient.Select();
+            var liste = DClient.ToList();
 
             return liste;
 

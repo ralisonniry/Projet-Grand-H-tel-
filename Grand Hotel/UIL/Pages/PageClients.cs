@@ -86,7 +86,7 @@ namespace UIL
             {
                 Output.WriteLine("Veuillez saisir les informations suivantes :");
                 Adresse ad = new Adresse();
-                ad.RueEtComplement = Input.Read<string>("Rue et complément :");
+               // ad.RueEtComplement = Input.Read<string>("Rue et complément :");
                 ad.CodePostal = Input.Read<string>("Code Postal:");
                 ad.Ville = Input.Read<string>("Ville :");
 
@@ -106,10 +106,10 @@ namespace UIL
 
             
 
-            if (!Metier.Enregister(cli))
-                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
-            else
-                Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
+           // if (!Metier.Enregister(cli))
+            //    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+            //else
+            //    Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
         }
         //----------------------------------------------------------------------
         //4-Ajouter un N° de téléphone ou une adresse email
