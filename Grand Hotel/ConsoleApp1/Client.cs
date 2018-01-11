@@ -19,7 +19,7 @@ namespace BOL
 
         public List<TelephoneBOL> ListeTel { get; set; }   // peut etre null
         public List<EmailBOL> ListeEmail { get; set; }     // peut etre null
-        public Adresse Adresse { get; set; }            // une seule adresse
+        public AdresseBOL Adresse { get; set; }            // une seule adresse
 
         
 

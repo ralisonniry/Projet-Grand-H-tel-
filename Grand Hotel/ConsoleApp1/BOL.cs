@@ -15,7 +15,7 @@ namespace BOL
 
 
 
-        public static List<ClientBOL> GetClients()
+        public static List<object> GetClients()
         {
             List<object> liste = BDD.AfficheListeClient();
 
@@ -32,12 +32,12 @@ namespace BOL
             return liste;
         }
 
-        public static ClientBOL GetId(int id)
-        {
-            ClientBOL client =  BDD.GetClient(id);
+       // public static ClientBOL GetId(int id)
+       // {
+           // ClientBOL client =  BDD.GetClient(id);
 
-            return client;
-        }
+           // return client;
+       // }
     }
 
 

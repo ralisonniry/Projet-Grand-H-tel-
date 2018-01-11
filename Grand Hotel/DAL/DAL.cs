@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DAL
 {
@@ -17,23 +18,40 @@ namespace DAL
 
 
         }
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
     public class DonneesClient : DbContext
     {
 
-        private DbSet<Client> DClient { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
 
 
-        public static List<Client> AfficheListeClient()
+        public DbSet<Client> DClient { get; set; }
+
+
+
+        public List<Client> AfficheListeClient()
         {
 
-            List<object> liste = new List<Client>();
+            List<Client> liste = new List<Client>();
 
-
-
-
+            liste = DClient.ToList();
 
 
 
