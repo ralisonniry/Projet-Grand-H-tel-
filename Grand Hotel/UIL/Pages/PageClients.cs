@@ -146,7 +146,7 @@ namespace UIL
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
 
                 //Enregistrement
-                if (!Metier.Enregister(tel))
+                if (!Metier.Enregister(tel, saisieId))
                     Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau teléphone avec succès");
                 else
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
@@ -171,7 +171,7 @@ namespace UIL
             {
 
             }
-            if (!Metier.Enregister(em))
+            if (!Metier.Enregister(em, saisieId))
                 Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau mail avec succès");
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");

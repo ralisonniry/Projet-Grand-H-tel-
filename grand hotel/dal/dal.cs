@@ -39,7 +39,15 @@ namespace DAL
             return DonneesClient.Instance.SaveClient(c);
         }
 
+        public static bool EnregistreAdresse(Adresse adressebol)
+        {
+            return DonneesClient.Instance.SaveAdresse(adressebol);
+        }
 
+        public static bool EnregistreAdresse(Telephone tele)
+        {
+            return DonneesClient.Instance.SaveTelephone(tele);
+        }
     }
 
 
@@ -125,9 +133,37 @@ namespace DAL
             return true;
         }
 
+        // Enregistre le tel id dans la BDD
+        internal bool SaveAdresse(Adresse adressebol)
+        {
+            try
+            {
+                adressebol.IdClient = DClient.Select(c => c.Id).Max();
+                DAdresse.Add(adressebol);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
 
-
-
+        // Enregistre le telephone id dans la BDD
+        internal bool SaveTelephone(Telephone tele)
+        {
+            try
+            {
+                tele.IdClient = DClient.Select(c => c.Id).Max();
+                DTelephone.Add(tele);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
 
