@@ -42,13 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="ContexteBOL.cs" />
+    <Compile Include="Facture.cs" />
     <Compile Include="GrandHotelApp.cs" />
     <Compile Include="PageClients.cs" />
     <Compile Include="PageFactures.cs" />
     <Compile Include="PageResultats.cs" />
     <Compile Include="PageAcceuil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reservation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

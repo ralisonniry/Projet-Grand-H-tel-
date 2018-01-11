@@ -11,6 +11,7 @@ namespace UIL
     class PageClients : MenuPage
     {
         private IList<Client> _clients;
+        private Client _client;
         public PageClients(): base("Page Clients")
         {
             Menu.AddOption("1", "Liste des CLients", AfficherClients);
@@ -22,10 +23,15 @@ namespace UIL
         private void InfoClient()
         {
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client pour ses coordonnées");
-            Metier.GetId(Id);
+            _client =  Metier.GetCLient(Id);
 
-            var coordonnees =_clients.Where(c=>c.Id == Id).Select(c=>c.Client).FirstOrDefault();
-            ConsoleTable.From(coordonnees).Display("Coordonnées");
+            Client c = new Client();
+
+            c.Adresse = _client.Adresse;
+            c.ListeTel = _client.ListeTel;
+            c.ListeEmail = _client.ListeEmail;
+
+            ConsoleTable.From(_client).Display("Coordonnées client");
         }
 
 

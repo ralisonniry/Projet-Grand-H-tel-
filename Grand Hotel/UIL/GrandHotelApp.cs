@@ -31,7 +31,7 @@ namespace UIL
         {
             get
             {
-                if (_ContexteMetier == null) _ContexteMetier = new Metier.Metier();     // maintenant on a juste a modifier ce contexte et on saura quel contexte ça va utiliser
+                if (_ContexteMetier == null) _ContexteMetier = new BOL.Metier();     // maintenant on a juste a modifier ce contexte et on saura quel contexte ça va utiliser
                 return _ContexteMetier;
             }
 
