@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContexteBOL.cs" />
     <Compile Include="GrandHotelApp.cs" />
     <Compile Include="PageClients.cs" />
     <Compile Include="PageFactures.cs" />
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\..\Outils\Console\TConsole.csproj">
       <Project>{222ADAFA-6E7D-404C-A04D-DB30BDF702A9}</Project>
       <Name>TConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConsoleApp1\BOL.csproj">
+      <Project>{BD3F45F1-BAA1-4EB0-875C-19486BAA968F}</Project>
+      <Name>BOL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

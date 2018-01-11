@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BOL
 
 {
-    public static class BOL
+    public class BOL : IContexteBOL
     {
 
 
