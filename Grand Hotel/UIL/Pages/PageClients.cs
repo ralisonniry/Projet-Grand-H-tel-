@@ -118,16 +118,13 @@ namespace UIL
             }
             else
             {
-
-                //erreur
+                Output.WriteLine("Erreur de saisie!");
             }
 
-            
-
-           // if (!Metier.Enregister(cli))
-            //    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
-            //else
-            //    Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
+            if (!Metier.Enregister(cli))
+                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+            else
+                Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
         }
         //----------------------------------------------------------------------
         //4-Ajouter un N° de téléphone ou une adresse email
@@ -136,17 +133,36 @@ namespace UIL
             //Saisie Identifiant Client
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
             string saisieId = Console.ReadLine();
-            _client = (Client)Metier.GetCLient(Id);
+            _client = Metier.GetCLient(Id);
 
+            //Saisie N° de teléphone 
+            Output.WriteLine("Voulez-vous entrer un N° de teléphone : O/N");
+            string choixTel = Console.ReadLine();
 
-            Output.WriteLine("Voulez-vous entrer : \n1. un N° de téléphone \n2. un email");
-            string choix = Console.ReadLine();
-
-            if (choix == "1")
+            if (choixTel == "O")
             {
                 Output.WriteLine("Veuillez saisir le numero de téléphone :");
                 Telephone tel = new Telephone();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
+            }
+            else
+            {
+
+            }
+
+            //Saisie Email 
+            Output.WriteLine("Voulez-vous entrer un N° de téléphone : O/N");
+            string choixEmail = Console.ReadLine();
+
+            if (choixEmail == "O")
+            {
+                Output.WriteLine("Veuillez saisir l'email :");
+                Email em = new Email();
+                em.Adresse = Input.Read<string>("Email :");
+            }
+            else
+            {
+
             }
         }
 
