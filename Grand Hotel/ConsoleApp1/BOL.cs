@@ -118,18 +118,18 @@ namespace BOL
 
         }
 
-        public static bool Enregister(TelephoneBOL c)
-        {
-            Telephone tele = new Telephone
-            {
-                 Numero = c.Numero,
-                 Pro = c.Pro,
-                 CodeType = c.CodeType
+        //public static bool Enregister(TelephoneBOL c)
+        //{
+        //    Telephone tele = new Telephone
+        //    {
+        //         Numero = c.Numero,
+        //         Pro = c.Pro,
+        //         CodeType = c.CodeType
                
-        };
+        //};
 
-            return BDD.EnregistreTelephone(tele);
-        }
+        //    return BDD.EnregistreTelephone(tele);
+        //}
 
         public static bool Enregister(TelephoneBOL c, int saisieId)      
         {
@@ -159,7 +159,9 @@ namespace BOL
             return BDD.EnregistreEmail(email);
         }
 
-
-
+        public static void SupprimerCLient(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
