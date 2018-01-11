@@ -50,6 +50,7 @@
     <Compile Include="PageFactures.cs" />
     <Compile Include="PageResultats.cs" />
     <Compile Include="PageAccueil.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reservation.cs" />
   </ItemGroup>
