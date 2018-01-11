@@ -11,17 +11,13 @@ namespace DAL
     public class BDD 
     {
 
-
-        public static List<object> AfficheListeClient()
+        public static List<string> AfficheListeClient()
         {
-
-            DonneesClient clas = new DonneesClient();
-
-             clas.AfficheListe();
-
-            return new List<object>();
-
+            return DonneesClient.Instance.AfficheListe();
         }
+
+
+
 
 
 
@@ -30,7 +26,7 @@ namespace DAL
 
     public class DonneesClient : DbContext
     {
-
+        private static DonneesClient _instance;
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,29 +35,38 @@ namespace DAL
 
         public DonneesClient() : base("name=test2.Properties.Settings1.GrandHotelChaine")
         {
+                
         }
 
+        public static DonneesClient Instance
+        {
 
+            get
+            {
+                if (_instance == null)
+                    _instance = new DonneesClient();
 
+                return _instance;
+            }
+
+        }           // pour instance unique de Donnees Clients
+
+        #region Dbset
         public DbSet<Client> DClient { get; set; }
 
 
 
+        #endregion
 
 
 
 
-        public void AfficheListe()
+
+        public List<string> AfficheListe()
         {
+            var liste = DClient.Select(c => c.Prenom+ "\t" + c.Nom).ToList();
 
-            List<Client> liste = new List<Client>();
-
-            liste = DClient.ToList();
-
-
-            Console.Read();
-
-
+            return liste;
 
         }
 

@@ -17,11 +17,9 @@ namespace BOL
 
 
 
-        public static List<object> GetClients()
+        public static List<string> GetClients()
         {
-            List<object> liste = BDD.AfficheListeClient();
-
-
+            List<string> liste = BDD.AfficheListeClient();
 
 
 
