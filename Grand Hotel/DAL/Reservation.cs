@@ -12,7 +12,7 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Reservation
+    public class Reservation
     {
         public short NumChambre { get; set; }
         public System.DateTime Jour { get; set; }

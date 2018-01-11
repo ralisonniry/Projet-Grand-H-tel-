@@ -13,9 +13,23 @@ namespace BOL
     public static class Metier
     {
 
+
+
         public static List<ClientBOL> GetClients()
         {
-            return  BDD.AfficheListeClient();
+            List<object> liste = BDD.AfficheListeClient();
+
+            foreach(var l in liste)
+            {
+
+               
+
+            }
+
+
+
+
+            return liste;
         }
 
         public static ClientBOL GetId(int id)
