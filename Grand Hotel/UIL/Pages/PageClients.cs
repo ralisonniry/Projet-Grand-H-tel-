@@ -23,8 +23,9 @@ namespace UIL
             Menu.AddOption("3", "Saisir un nouveau client", SaisirClient);
             Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
             Menu.AddOption("5", "Supprimer un client", SupClient);
-            Menu.AddOption("6", "Supprimer un client", SupClient);
+            Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
         }
+
 
 
         //-----------------------------------------------------------------------------
@@ -204,7 +205,7 @@ namespace UIL
 
         public void SupClient()
         {
-            int id = Input.Read<int>("Id du produit à supprimer :");
+            int id = Input.Read<int>("Id du client à supprimer :");
             try
             {
                 Metier.SupprimerCLient(id);
@@ -223,5 +224,18 @@ namespace UIL
             else
                 throw ex;
         }
+        //----------------------------------------------------------------------
+        //6-Sauvegarder la liste des clients
+
+        private void SauveClient()
+        {
+            List<ClientBOL> liste = new List<ClientBOL>();
+            Console.WriteLine("Exportation de la liste des clients en format XML");
+            if (Metier.ExporterXml(liste))
+                Output.WriteLine(ConsoleColor.Blue, "Succès de l'opération Export");
+            else
+                Output.WriteLine(ConsoleColor.Red, "Erreur de l'opération Export!!!");
+        }
+
     }
 }
