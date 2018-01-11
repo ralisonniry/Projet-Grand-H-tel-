@@ -1,0 +1,757 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GrandHotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Rue" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Complement" Type="nvarchar" MaxLength="40" />
+          <Property Name="CodePostal" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Ville" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Calendrier">
+          <Key>
+            <PropertyRef Name="Jour" />
+          </Key>
+          <Property Name="Jour" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chambre">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="smallint" Nullable="false" />
+          <Property Name="Etage" Type="tinyint" Nullable="false" />
+          <Property Name="Bain" Type="bit" Nullable="false" />
+          <Property Name="Douche" Type="bit" Nullable="false" />
+          <Property Name="WC" Type="bit" Nullable="false" />
+          <Property Name="NbLits" Type="tinyint" Nullable="false" />
+          <Property Name="NumTel" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Civilite" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="CarteFidelite" Type="bit" Nullable="false" />
+          <Property Name="Societe" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Adresse" />
+          </Key>
+          <Property Name="Adresse" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="Pro" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="DateFacture" Type="date" Nullable="false" />
+          <Property Name="DatePaiement" Type="date" />
+          <Property Name="CodeModePaiement" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LigneFacture">
+          <Key>
+            <PropertyRef Name="IdFacture" />
+            <PropertyRef Name="NumLigne" />
+          </Key>
+          <Property Name="IdFacture" Type="int" Nullable="false" />
+          <Property Name="NumLigne" Type="int" Nullable="false" />
+          <Property Name="Quantite" Type="smallint" Nullable="false" />
+          <Property Name="MontantHT" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="TauxTVA" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="TauxReduction" Type="decimal" Precision="6" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModePaiement">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="NumChambre" />
+            <PropertyRef Name="Jour" />
+          </Key>
+          <Property Name="NumChambre" Type="smallint" Nullable="false" />
+          <Property Name="Jour" Type="date" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="NbPersonnes" Type="tinyint" Nullable="false" />
+          <Property Name="HeureArrivee" Type="tinyint" Nullable="false" />
+          <Property Name="Travail" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tarif">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateDebut" Type="date" Nullable="false" />
+          <Property Name="Prix" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TarifChambre">
+          <Key>
+            <PropertyRef Name="NumChambre" />
+            <PropertyRef Name="CodeTarif" />
+          </Key>
+          <Property Name="NumChambre" Type="smallint" Nullable="false" />
+          <Property Name="CodeTarif" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telephone">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="CodeType" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Pro" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Adresse_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Email_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Email" Type="Self.Email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Email">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Paiement">
+          <End Role="ModePaiement" Type="Self.ModePaiement" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModePaiement">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="CodeModePaiement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneFacture_Facture">
+          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
+          <End Role="LigneFacture" Type="Self.LigneFacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LigneFacture">
+              <PropertyRef Name="IdFacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Calendrier">
+          <End Role="Calendrier" Type="Self.Calendrier" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendrier">
+              <PropertyRef Name="Jour" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="Jour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Chambre">
+          <End Role="Chambre" Type="Self.Chambre" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chambre">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="NumChambre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TarifChambre_Chambre">
+          <End Role="Chambre" Type="Self.Chambre" Multiplicity="1" />
+          <End Role="TarifChambre" Type="Self.TarifChambre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chambre">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="TarifChambre">
+              <PropertyRef Name="NumChambre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TarifChambre_Tarif">
+          <End Role="Tarif" Type="Self.Tarif" Multiplicity="1" />
+          <End Role="TarifChambre" Type="Self.TarifChambre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tarif">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="TarifChambre">
+              <PropertyRef Name="CodeTarif" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telephone_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Telephone" Type="Self.Telephone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Telephone">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GrandHotelModelStoreContainer">
+          <EntitySet Name="Adresse" EntityType="Self.Adresse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Calendrier" EntityType="Self.Calendrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chambre" EntityType="Self.Chambre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LigneFacture" EntityType="Self.LigneFacture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModePaiement" EntityType="Self.ModePaiement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarif" EntityType="Self.Tarif" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TarifChambre" EntityType="Self.TarifChambre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telephone" EntityType="Self.Telephone" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Adresse_Client" Association="Self.FK_Adresse_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Email_Client" Association="Self.FK_Email_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Email" EntitySet="Email" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Client" Association="Self.FK_Facture_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Paiement" Association="Self.FK_Facture_Paiement">
+            <End Role="ModePaiement" EntitySet="ModePaiement" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneFacture_Facture" Association="Self.FK_LigneFacture_Facture">
+            <End Role="Facture" EntitySet="Facture" />
+            <End Role="LigneFacture" EntitySet="LigneFacture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Calendrier" Association="Self.FK_Reservation_Calendrier">
+            <End Role="Calendrier" EntitySet="Calendrier" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Chambre" Association="Self.FK_Reservation_Chambre">
+            <End Role="Chambre" EntitySet="Chambre" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Client" Association="Self.FK_Reservation_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TarifChambre_Chambre" Association="Self.FK_TarifChambre_Chambre">
+            <End Role="Chambre" EntitySet="Chambre" />
+            <End Role="TarifChambre" EntitySet="TarifChambre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TarifChambre_Tarif" Association="Self.FK_TarifChambre_Tarif">
+            <End Role="Tarif" EntitySet="Tarif" />
+            <End Role="TarifChambre" EntitySet="TarifChambre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telephone_Client" Association="Self.FK_Telephone_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Telephone" EntitySet="Telephone" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GrandHotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Rue" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Complement" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="CodePostal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ville" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Adresse_Client" FromRole="Adresse" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Calendrier">
+          <Key>
+            <PropertyRef Name="Jour" />
+          </Key>
+          <Property Name="Jour" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Calendrier" FromRole="Calendrier" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Chambre">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="Int16" Nullable="false" />
+          <Property Name="Etage" Type="Byte" Nullable="false" />
+          <Property Name="Bain" Type="Boolean" Nullable="false" />
+          <Property Name="Douche" Type="Boolean" Nullable="false" />
+          <Property Name="WC" Type="Boolean" Nullable="false" />
+          <Property Name="NbLits" Type="Byte" Nullable="false" />
+          <Property Name="NumTel" Type="Int16" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Chambre" FromRole="Chambre" ToRole="Reservation" />
+          <NavigationProperty Name="Tarif" Relationship="Self.TarifChambre" FromRole="Chambre" ToRole="Tarif" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Civilite" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nom" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CarteFidelite" Type="Boolean" Nullable="false" />
+          <Property Name="Societe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adresse" Relationship="Self.FK_Adresse_Client" FromRole="Client" ToRole="Adresse" />
+          <NavigationProperty Name="Email" Relationship="Self.FK_Email_Client" FromRole="Client" ToRole="Email" />
+          <NavigationProperty Name="Facture" Relationship="Self.FK_Facture_Client" FromRole="Client" ToRole="Facture" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Client" FromRole="Client" ToRole="Reservation" />
+          <NavigationProperty Name="Telephone" Relationship="Self.FK_Telephone_Client" FromRole="Client" ToRole="Telephone" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Adresse" />
+          </Key>
+          <Property Name="Adresse" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="Pro" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Email_Client" FromRole="Email" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Facture">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="DateFacture" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DatePaiement" Type="DateTime" Precision="0" />
+          <Property Name="CodeModePaiement" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Facture_Client" FromRole="Facture" ToRole="Client" />
+          <NavigationProperty Name="ModePaiement" Relationship="Self.FK_Facture_Paiement" FromRole="Facture" ToRole="ModePaiement" />
+          <NavigationProperty Name="LigneFacture" Relationship="Self.FK_LigneFacture_Facture" FromRole="Facture" ToRole="LigneFacture" />
+        </EntityType>
+        <EntityType Name="LigneFacture">
+          <Key>
+            <PropertyRef Name="IdFacture" />
+            <PropertyRef Name="NumLigne" />
+          </Key>
+          <Property Name="IdFacture" Type="Int32" Nullable="false" />
+          <Property Name="NumLigne" Type="Int32" Nullable="false" />
+          <Property Name="Quantite" Type="Int16" Nullable="false" />
+          <Property Name="MontantHT" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="TauxTVA" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <Property Name="TauxReduction" Type="Decimal" Precision="6" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Facture" Relationship="Self.FK_LigneFacture_Facture" FromRole="LigneFacture" ToRole="Facture" />
+        </EntityType>
+        <EntityType Name="ModePaiement">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Libelle" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Facture" Relationship="Self.FK_Facture_Paiement" FromRole="ModePaiement" ToRole="Facture" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="NumChambre" />
+            <PropertyRef Name="Jour" />
+          </Key>
+          <Property Name="NumChambre" Type="Int16" Nullable="false" />
+          <Property Name="Jour" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="NbPersonnes" Type="Byte" Nullable="false" />
+          <Property Name="HeureArrivee" Type="Byte" Nullable="false" />
+          <Property Name="Travail" Type="Boolean" />
+          <NavigationProperty Name="Calendrier" Relationship="Self.FK_Reservation_Calendrier" FromRole="Reservation" ToRole="Calendrier" />
+          <NavigationProperty Name="Chambre" Relationship="Self.FK_Reservation_Chambre" FromRole="Reservation" ToRole="Chambre" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Reservation_Client" FromRole="Reservation" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Tarif">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateDebut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Prix" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <NavigationProperty Name="Chambre" Relationship="Self.TarifChambre" FromRole="Tarif" ToRole="Chambre" />
+        </EntityType>
+        <EntityType Name="Telephone">
+          <Key>
+            <PropertyRef Name="Numero" />
+          </Key>
+          <Property Name="Numero" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="CodeType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Pro" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Telephone_Client" FromRole="Telephone" ToRole="Client" />
+        </EntityType>
+        <Association Name="FK_Adresse_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Calendrier">
+          <End Role="Calendrier" Type="Self.Calendrier" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendrier">
+              <PropertyRef Name="Jour" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="Jour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Chambre">
+          <End Role="Chambre" Type="Self.Chambre" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chambre">
+              <PropertyRef Name="Numero" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="NumChambre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Email_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Email" Type="Self.Email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Email">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telephone_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Telephone" Type="Self.Telephone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Telephone">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Facture_Paiement">
+          <End Role="ModePaiement" Type="Self.ModePaiement" Multiplicity="1" />
+          <End Role="Facture" Type="Self.Facture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModePaiement">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Facture">
+              <PropertyRef Name="CodeModePaiement" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LigneFacture_Facture">
+          <End Role="Facture" Type="Self.Facture" Multiplicity="1" />
+          <End Role="LigneFacture" Type="Self.LigneFacture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facture">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LigneFacture">
+              <PropertyRef Name="IdFacture" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TarifChambre">
+          <End Role="Chambre" Type="Self.Chambre" Multiplicity="*" />
+          <End Role="Tarif" Type="Self.Tarif" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="GrandHotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adresse" EntityType="Self.Adresse" />
+          <EntitySet Name="Calendrier" EntityType="Self.Calendrier" />
+          <EntitySet Name="Chambre" EntityType="Self.Chambre" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Email" EntityType="Self.Email" />
+          <EntitySet Name="Facture" EntityType="Self.Facture" />
+          <EntitySet Name="LigneFacture" EntityType="Self.LigneFacture" />
+          <EntitySet Name="ModePaiement" EntityType="Self.ModePaiement" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" />
+          <EntitySet Name="Tarif" EntityType="Self.Tarif" />
+          <EntitySet Name="Telephone" EntityType="Self.Telephone" />
+          <AssociationSet Name="FK_Adresse_Client" Association="Self.FK_Adresse_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Calendrier" Association="Self.FK_Reservation_Calendrier">
+            <End Role="Calendrier" EntitySet="Calendrier" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Chambre" Association="Self.FK_Reservation_Chambre">
+            <End Role="Chambre" EntitySet="Chambre" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Email_Client" Association="Self.FK_Email_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Email" EntitySet="Email" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Client" Association="Self.FK_Facture_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Client" Association="Self.FK_Reservation_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telephone_Client" Association="Self.FK_Telephone_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Telephone" EntitySet="Telephone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Facture_Paiement" Association="Self.FK_Facture_Paiement">
+            <End Role="ModePaiement" EntitySet="ModePaiement" />
+            <End Role="Facture" EntitySet="Facture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LigneFacture_Facture" Association="Self.FK_LigneFacture_Facture">
+            <End Role="Facture" EntitySet="Facture" />
+            <End Role="LigneFacture" EntitySet="LigneFacture" />
+          </AssociationSet>
+          <AssociationSet Name="TarifChambre" Association="Self.TarifChambre">
+            <End Role="Chambre" EntitySet="Chambre" />
+            <End Role="Tarif" EntitySet="Tarif" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GrandHotelModelStoreContainer" CdmEntityContainer="GrandHotelEntities">
+          <EntitySetMapping Name="Adresse">
+            <EntityTypeMapping TypeName="GrandHotelModel.Adresse">
+              <MappingFragment StoreEntitySet="Adresse">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Rue" ColumnName="Rue" />
+                <ScalarProperty Name="Complement" ColumnName="Complement" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Calendrier">
+            <EntityTypeMapping TypeName="GrandHotelModel.Calendrier">
+              <MappingFragment StoreEntitySet="Calendrier">
+                <ScalarProperty Name="Jour" ColumnName="Jour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chambre">
+            <EntityTypeMapping TypeName="GrandHotelModel.Chambre">
+              <MappingFragment StoreEntitySet="Chambre">
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Etage" ColumnName="Etage" />
+                <ScalarProperty Name="Bain" ColumnName="Bain" />
+                <ScalarProperty Name="Douche" ColumnName="Douche" />
+                <ScalarProperty Name="WC" ColumnName="WC" />
+                <ScalarProperty Name="NbLits" ColumnName="NbLits" />
+                <ScalarProperty Name="NumTel" ColumnName="NumTel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="GrandHotelModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Civilite" ColumnName="Civilite" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="CarteFidelite" ColumnName="CarteFidelite" />
+                <ScalarProperty Name="Societe" ColumnName="Societe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Email">
+            <EntityTypeMapping TypeName="GrandHotelModel.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Pro" ColumnName="Pro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facture">
+            <EntityTypeMapping TypeName="GrandHotelModel.Facture">
+              <MappingFragment StoreEntitySet="Facture">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="DateFacture" ColumnName="DateFacture" />
+                <ScalarProperty Name="DatePaiement" ColumnName="DatePaiement" />
+                <ScalarProperty Name="CodeModePaiement" ColumnName="CodeModePaiement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LigneFacture">
+            <EntityTypeMapping TypeName="GrandHotelModel.LigneFacture">
+              <MappingFragment StoreEntitySet="LigneFacture">
+                <ScalarProperty Name="IdFacture" ColumnName="IdFacture" />
+                <ScalarProperty Name="NumLigne" ColumnName="NumLigne" />
+                <ScalarProperty Name="Quantite" ColumnName="Quantite" />
+                <ScalarProperty Name="MontantHT" ColumnName="MontantHT" />
+                <ScalarProperty Name="TauxTVA" ColumnName="TauxTVA" />
+                <ScalarProperty Name="TauxReduction" ColumnName="TauxReduction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModePaiement">
+            <EntityTypeMapping TypeName="GrandHotelModel.ModePaiement">
+              <MappingFragment StoreEntitySet="ModePaiement">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="GrandHotelModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="NumChambre" ColumnName="NumChambre" />
+                <ScalarProperty Name="Jour" ColumnName="Jour" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="NbPersonnes" ColumnName="NbPersonnes" />
+                <ScalarProperty Name="HeureArrivee" ColumnName="HeureArrivee" />
+                <ScalarProperty Name="Travail" ColumnName="Travail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarif">
+            <EntityTypeMapping TypeName="GrandHotelModel.Tarif">
+              <MappingFragment StoreEntitySet="Tarif">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="Prix" ColumnName="Prix" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telephone">
+            <EntityTypeMapping TypeName="GrandHotelModel.Telephone">
+              <MappingFragment StoreEntitySet="Telephone">
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="CodeType" ColumnName="CodeType" />
+                <ScalarProperty Name="Pro" ColumnName="Pro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="TarifChambre" TypeName="GrandHotelModel.TarifChambre" StoreEntitySet="TarifChambre">
+            <EndProperty Name="Chambre">
+              <ScalarProperty Name="Numero" ColumnName="NumChambre" />
+            </EndProperty>
+            <EndProperty Name="Tarif">
+              <ScalarProperty Name="Code" ColumnName="CodeTarif" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

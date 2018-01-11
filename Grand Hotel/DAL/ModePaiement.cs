@@ -12,17 +12,16 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Reservation
+    public partial class ModePaiement
     {
-        public short NumChambre { get; set; }
-        public System.DateTime Jour { get; set; }
-        public int IdClient { get; set; }
-        public byte NbPersonnes { get; set; }
-        public byte HeureArrivee { get; set; }
-        public Nullable<bool> Travail { get; set; }
+        public ModePaiement()
+        {
+            this.Facture = new HashSet<Facture>();
+        }
     
-        public virtual Calendrier Calendrier { get; set; }
-        public virtual Chambre Chambre { get; set; }
-        public virtual Client Client { get; set; }
+        public string Code { get; set; }
+        public string Libelle { get; set; }
+    
+        public virtual ICollection<Facture> Facture { get; set; }
     }
 }

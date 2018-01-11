@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eba8af0f184a459bb29c8c77f8309079" Name="Diagram1">
+        <EntityTypeShape EntityType="GrandHotelModel.Adresse" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Calendrier" Width="1.5" PointX="3.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Chambre" Width="1.5" PointX="3.75" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Client" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Email" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Facture" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.LigneFacture" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.ModePaiement" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Reservation" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Tarif" Width="1.5" PointX="6" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrandHotelModel.Telephone" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <AssociationConnector Association="GrandHotelModel.FK_Adresse_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Reservation_Calendrier" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Reservation_Chambre" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Email_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Facture_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Reservation_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Telephone_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_Facture_Paiement" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.FK_LigneFacture_Facture" ManuallyRouted="false" />
+        <AssociationConnector Association="GrandHotelModel.TarifChambre" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -12,21 +12,23 @@ namespace DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Facture
+    public partial class Chambre
     {
-        public Facture()
+        public Chambre()
         {
-            this.LigneFacture = new HashSet<LigneFacture>();
+            this.Reservation = new HashSet<Reservation>();
+            this.Tarif = new HashSet<Tarif>();
         }
     
-        public int Id { get; set; }
-        public int IdClient { get; set; }
-        public System.DateTime DateFacture { get; set; }
-        public Nullable<System.DateTime> DatePaiement { get; set; }
-        public string CodeModePaiement { get; set; }
+        public short Numero { get; set; }
+        public byte Etage { get; set; }
+        public bool Bain { get; set; }
+        public bool Douche { get; set; }
+        public bool WC { get; set; }
+        public byte NbLits { get; set; }
+        public Nullable<short> NumTel { get; set; }
     
-        public virtual Client Client { get; set; }
-        public virtual ModePaiement ModePaiement { get; set; }
-        public virtual ICollection<LigneFacture> LigneFacture { get; set; }
+        public virtual ICollection<Reservation> Reservation { get; set; }
+        public virtual ICollection<Tarif> Tarif { get; set; }
     }
 }
