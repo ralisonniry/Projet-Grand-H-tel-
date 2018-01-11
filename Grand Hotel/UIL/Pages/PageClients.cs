@@ -97,14 +97,14 @@ namespace UIL
             cli.Prenom = Input.Read<string>("Prenom");
             cli.CarteFidelite = Input.Read<bool>("0 (Non) ou 1 (Oui) :");
             cli.Societe = Input.Read<string>("Nom (si renseigné) :");
-
+            AdresseBOL ad = new AdresseBOL();
             //Saisie adresse client
             Output.WriteLine("Voulez-vous entrer l'adresse du nouveau client : O/N");
             string choix = Console.ReadLine();
             if (choix == "O")
             {
                 Output.WriteLine("Veuillez saisir les informations suivantes :");
-                AdresseBOL ad = new AdresseBOL();
+
                // ad.RueEtComplement = Input.Read<string>("Rue et complément :");
                 ad.CodePostal = Input.Read<string>("Code Postal:");
                 ad.Ville = Input.Read<string>("Ville :");
@@ -122,7 +122,7 @@ namespace UIL
                 Output.WriteLine("Erreur de saisie!");
             }
 
-            if (!Metier.Enregister(cli))
+            if (Metier.Enregister(cli) && Metier.Enregister(ad))
                 Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
@@ -144,11 +144,19 @@ namespace UIL
                 Output.WriteLine("Veuillez saisir le numero de téléphone :");
                 TelephoneBOL tel = new TelephoneBOL();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
+
+                //Enregistrement
+                if (!Metier.Enregister(tel))
+                    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+                else
+                    Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
             }
             else
             {
 
             }
+
+
 
             //Saisie Email 
             Output.WriteLine("Voulez-vous entrer un N° de téléphone : O/N");
@@ -164,6 +172,12 @@ namespace UIL
             {
 
             }
+            if (!Metier.Enregister(cli))
+                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+            else
+                Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
+
+
         }
 
 
