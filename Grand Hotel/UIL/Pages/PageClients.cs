@@ -145,7 +145,7 @@ namespace UIL
                 TelephoneBOL tel = new TelephoneBOL();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
 
-                //Enregistrement
+                //Enregistrement teléphone
                 if (!Metier.Enregister(tel, saisieId))
                     Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau teléphone avec succès");
                 else
@@ -166,15 +166,18 @@ namespace UIL
                 Output.WriteLine("Veuillez saisir l'email :");
                 EmailBOL em = new EmailBOL();
                 em.AdresseMail = Input.Read<string>("Email :");
+
+                //Enregistrement Email
+                if (!Metier.Enregister(em, saisieId))
+                    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau mail avec succès");
+                else
+                    Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
+
             }
             else
             {
 
             }
-            if (!Metier.Enregister(em, saisieId))
-                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau mail avec succès");
-            else
-                Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
 
         }
         //----------------------------------------------------------------------
