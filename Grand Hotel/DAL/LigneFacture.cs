@@ -11,10 +11,16 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class LigneFacture
     {
+
+        [Key, Column(Order = 0)]
+        [ForeignKey("Facture")]
         public int IdFacture { get; set; }
+        [Key, Column(Order = 1)]
         public int NumLigne { get; set; }
         public short Quantite { get; set; }
         public decimal MontantHT { get; set; }

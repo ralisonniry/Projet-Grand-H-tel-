@@ -11,14 +11,12 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ModePaiement
     {
-        public ModePaiement()
-        {
-            this.Facture = new HashSet<Facture>();
-        }
     
+        [Key]
         public string Code { get; set; }
         public string Libelle { get; set; }
     

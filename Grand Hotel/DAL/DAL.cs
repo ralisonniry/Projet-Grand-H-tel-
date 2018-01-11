@@ -8,24 +8,20 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace DAL
 {
-    public class BDD
+    public class BDD 
     {
+
+
         public static List<object> AfficheListeClient()
         {
 
-            return AfficheListeClient();
+            DonneesClient clas = new DonneesClient();
 
+             clas.AfficheListe();
 
+            return new List<object>();
 
         }
-
-
-
-
-
-
-
-
 
 
 
@@ -41,12 +37,21 @@ namespace DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
+        public DonneesClient() : base("name=test2.Properties.Settings1.GrandHotelChaine")
+        {
+        }
+
+
 
         public DbSet<Client> DClient { get; set; }
 
 
 
-        public List<Client> AfficheListeClient()
+
+
+
+
+        public void AfficheListe()
         {
 
             List<Client> liste = new List<Client>();
@@ -54,9 +59,8 @@ namespace DAL
             liste = DClient.ToList();
 
 
+            Console.Read();
 
-
-            return liste;
 
 
         }

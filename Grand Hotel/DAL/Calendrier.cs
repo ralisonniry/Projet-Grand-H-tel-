@@ -11,16 +11,14 @@ namespace DAL
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Calendrier
     {
-        public Calendrier()
-        {
-            this.Reservation = new HashSet<Reservation>();
-        }
+
+        [Key]
+        public DateTime Jour { get; set; }
     
-        public System.DateTime Jour { get; set; }
-    
-        public virtual ICollection<Reservation> Reservation { get; set; }
+
     }
 }

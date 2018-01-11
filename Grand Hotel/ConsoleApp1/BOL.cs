@@ -5,6 +5,8 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+
 
 
 namespace BOL
@@ -19,12 +21,6 @@ namespace BOL
         {
             List<object> liste = BDD.AfficheListeClient();
 
-            foreach(var l in liste)
-            {
-
-               
-
-            }
 
 
 
