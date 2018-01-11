@@ -40,8 +40,7 @@ namespace UIL
         public void InfoClient()
         {
             //Saisie Identifiant Client
-            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client : ");
-            string saisieId = Console.ReadLine();
+            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
 
 
             //Demande choix Coordonnées
@@ -147,7 +146,7 @@ namespace UIL
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
 
                 //Enregistrement teléphone
-                if (!Metier.Enregister(tel, saisieId))
+                if (Metier.Enregister(tel, saisieId))
                     Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau teléphone avec succès");
                 else
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
@@ -169,7 +168,7 @@ namespace UIL
                 em.AdresseMail = Input.Read<string>("Email :");
 
                 //Enregistrement Email
-                if (!Metier.Enregister(em, saisieId))
+                if (Metier.Enregister(em, saisieId))
                     Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau mail avec succès");
                 else
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
