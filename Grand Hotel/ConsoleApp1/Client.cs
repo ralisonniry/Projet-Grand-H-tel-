@@ -23,8 +23,7 @@ namespace BOL
     public class TelephoneBOL
     {
         public string Numero { get; set; }
-        public int IdClient { get; set; }
-        public bool CodeType { get; set; }          // 0 = fixe (F) / 1 = mobile (M)
+        public string CodeType { get; set; }          // 0 = fixe (F) / 1 = mobile (M)
         public bool Pro { get; set; }               // 0 = Particulier  /  1  = Pro
 
     }

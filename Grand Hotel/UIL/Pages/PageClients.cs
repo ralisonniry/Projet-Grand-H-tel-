@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAL;
+
 
 namespace UIL
 
@@ -13,8 +13,8 @@ namespace UIL
 {
     class PageClients : MenuPage
     {
-        private IList<Client> _clients;
-        private object _client;
+        private IList<ClientBOL> _clients;
+        private ClientBOL _client;
         public PageClients() : base("Page Clients")
         {
             Menu.AddOption("1", "Liste des cLients", AfficherClients);
@@ -40,7 +40,6 @@ namespace UIL
             //Saisie Identifiant Client
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client : ");
             string saisieId = Console.ReadLine();
-            _client = Metier.GetCLient(Id);
 
 
             //Demande choix Coordonnées
@@ -51,7 +50,9 @@ namespace UIL
                 case "1":
                     {
                         var adresse = Metier.GetAdresse(Id);
-                        ConsoleTable.From(adresse, "Adressse").Display("Adresse");
+                        List<AdresseBOL> listeadresse = new List<AdresseBOL>();
+                        listeadresse.Add(adresse);
+                        ConsoleTable.From(listeadresse, "Adressse").Display("Adresse");
                     }
                     break;
                 case "2":
@@ -90,7 +91,7 @@ namespace UIL
 
 
             Output.WriteLine("Saisissez les informations du nouveau client :");
-            Client cli = new Client();
+            ClientBOL cli = new ClientBOL();
             cli.Civilite = Input.Read<string>("Civilité (M/Mlle/Mme) :");
             cli.Nom = Input.Read<string>("Nom :");
             cli.Prenom = Input.Read<string>("Prenom");
@@ -103,7 +104,7 @@ namespace UIL
             if (choix == "O")
             {
                 Output.WriteLine("Veuillez saisir les informations suivantes :");
-                Adresse ad = new Adresse();
+                AdresseBOL ad = new AdresseBOL();
                // ad.RueEtComplement = Input.Read<string>("Rue et complément :");
                 ad.CodePostal = Input.Read<string>("Code Postal:");
                 ad.Ville = Input.Read<string>("Ville :");
@@ -133,7 +134,6 @@ namespace UIL
             //Saisie Identifiant Client
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
             string saisieId = Console.ReadLine();
-            _client = Metier.GetCLient(Id);
 
             //Saisie N° de teléphone 
             Output.WriteLine("Voulez-vous entrer un N° de teléphone : O/N");
@@ -142,7 +142,7 @@ namespace UIL
             if (choixTel == "O")
             {
                 Output.WriteLine("Veuillez saisir le numero de téléphone :");
-                Telephone tel = new Telephone();
+                TelephoneBOL tel = new TelephoneBOL();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
             }
             else
@@ -157,8 +157,8 @@ namespace UIL
             if (choixEmail == "O")
             {
                 Output.WriteLine("Veuillez saisir l'email :");
-                Email em = new Email();
-                em.Adresse = Input.Read<string>("Email :");
+                EmailBOL em = new EmailBOL();
+                em.AdresseMail = Input.Read<string>("Email :");
             }
             else
             {

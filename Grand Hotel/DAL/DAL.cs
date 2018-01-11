@@ -18,7 +18,18 @@ namespace DAL
 
         public static Adresse ChercheAdresseClient(int id)
         {
-            return DonneesClient.Instance.GetAdress(id);
+            return DonneesClient.Instance.GetAddress(id);
+        }
+
+        public static List<Telephone> GetTelephone(int id)
+        {
+            return DonneesClient.Instance.GetTel(id);
+
+        }
+
+        public static List<Email> GetEmail(int id)
+        {
+            return DonneesClient.Instance.GetMail(id);
         }
     }
 
@@ -57,8 +68,9 @@ namespace DAL
 
         #region Dbset
         public DbSet<Client> DClient { get; set; }
+        public DbSet<Telephone> DTelephone { get; set; }
         public DbSet<Adresse> DAdresse { get; set; }
-
+        public DbSet<Email> DEmail { get; set; }
 
         #endregion
 
@@ -72,13 +84,22 @@ namespace DAL
         }
 
         // regarde en local l'adresse du client id
-        public Adresse GetAdress(int id)
+        public Adresse GetAddress(int id)
         {
-            return DAdresse.Local.Where(a => a.IdClient == id).FirstOrDefault();
+            return DAdresse.Where(a => a.IdClient == id).FirstOrDefault();
         }
 
+        // regarde en local le tel du client id
+        public List<Telephone> GetTel(int id)
+        {
+            return DTelephone.Where(t=> t.IdClient == id).ToList();
+        }
 
-
+        // regarde en local le mail du client id
+        internal List<Email> GetMail(int id)
+        {
+            return DEmail.Where(t => t.IdClient == id).ToList();
+        }
     }
 
 
