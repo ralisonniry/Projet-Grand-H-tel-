@@ -32,8 +32,6 @@ namespace DAL
             return DonneesClient.Instance.GetMail(id);
         }
 
-
-
         public static bool EnregistreClient(Client c)
         {
             return DonneesClient.Instance.SaveClient(c);
@@ -44,9 +42,14 @@ namespace DAL
             return DonneesClient.Instance.SaveAdresse(adressebol);
         }
 
-        public static bool EnregistreAdresse(Telephone tele)
+        public static bool EnregistreTelephone(Telephone tele)
         {
             return DonneesClient.Instance.SaveTelephone(tele);
+        }
+
+        public static bool EnregistreEmail(Email email)
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -154,6 +157,7 @@ namespace DAL
         {
             try
             {
+                if(tele.IdClient == 0)
                 tele.IdClient = DClient.Select(c => c.Id).Max();
                 DTelephone.Add(tele);
                 SaveChanges();
@@ -164,6 +168,11 @@ namespace DAL
             }
             return true;
         }
+
+
+
+
+
     }
 
 
