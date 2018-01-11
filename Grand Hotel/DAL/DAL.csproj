@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD3F45F1-BAA1-4EB0-875C-19486BAA968F}</ProjectGuid>
+    <ProjectGuid>{242371FF-16E1-43D9-843E-8A18A8EF2376}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp1</RootNamespace>
-    <AssemblyName>ConsoleApp1</AssemblyName>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,20 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BOL.cs" />
-    <Compile Include="Client.cs" />
-    <Compile Include="Facture.cs" />
-    <Compile Include="Reservation.cs" />
+    <Compile Include="DAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{242371ff-16e1-43d9-843e-8a18a8ef2376}</Project>
-      <Name>DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
