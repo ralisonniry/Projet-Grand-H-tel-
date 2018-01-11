@@ -49,7 +49,7 @@ namespace DAL
 
         public static bool EnregistreEmail(Email email)
         {
-            throw new NotImplementedException();
+            return DonneesClient.Instance.SaveEmail(email);
         }
     }
 
@@ -169,10 +169,19 @@ namespace DAL
             return true;
         }
 
-
-
-
-
+        internal bool SaveEmail(Email email)
+        {
+            try
+            {
+                DEmail.Add(email);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 
 
