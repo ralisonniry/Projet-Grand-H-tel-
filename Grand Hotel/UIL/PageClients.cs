@@ -1,4 +1,5 @@
-﻿using Outils.TConsole;
+﻿using BOL;
+using Outils.TConsole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace UIL
 {
     class PageClients : MenuPage
     {
+        private IList<Client> _clients;
         public PageClients(): base("Page Clients")
         {
             Menu.AddOption("1", "Liste des CLients", AfficherClients);
@@ -19,12 +21,16 @@ namespace UIL
 
         private void InfoClient()
         {
-            int 
+            int client = Input.Read<int>("Veuillez saisir l'identifiant du client");
+            var coordonnees =
+            ConsoleTable.From(fournisseurs).Display("Fournisseurs");
         }
 
+
+        //Affichage de la liste des clients
         private void AfficherClients()
         {
-            var Clients = BOL.GetClients();
+            var Clients = GrandHotelApp.GetClients();
             ConsoleTable.From(Clients).Dispaly("Clients");
         }
     }
