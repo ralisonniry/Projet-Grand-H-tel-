@@ -23,7 +23,7 @@ namespace UIL
             Menu.AddOption("3", "Saisir un nouveau client", SaisirClient);
             Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
             Menu.AddOption("5", "Supprimer un client", SupClient);
-
+            Menu.AddOption("6", "Supprimer un client", SupClient);
         }
 
 
@@ -96,8 +96,8 @@ namespace UIL
             cli.Civilite = Input.Read<string>("Civilité (M/Mlle/Mme) :");
             cli.Nom = Input.Read<string>("Nom :");
             cli.Prenom = Input.Read<string>("Prenom");
-            cli.CarteFidelite = Input.Read<bool>("0 (Non) ou 1 (Oui) :");
-            cli.Societe = Input.Read<string>("Nom (si renseigné) :");
+            cli.CarteFidelite = Input.Read<bool>("Avez vous une carte de fidelité: 0 (False) ou 1 (True) :");
+            cli.Societe = Input.Read<string>("Nom de société (si renseigné) :");
 
             Metier.Enregister(cli);
             AdresseBOL ad = new AdresseBOL();
@@ -144,16 +144,17 @@ namespace UIL
                 Output.WriteLine("Veuillez saisir le numero de téléphone :");
                 TelephoneBOL tel = new TelephoneBOL();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
-                tel.CodeType= Input.Read<string>("Fixe (F) ou Mobile (M) :");
-                string saisieCT = Console.ReadLine();
+                string saisieCT = Input.Read<string>("Fixe (F) ou Mobile (M) :");
                 bool saisie = false;
                 switch (saisieCT)
                 {
                     case "F":
                         saisie = true;
+                        tel.CodeType = saisieCT;
                         break;
                     case "M":
-                        saisie = false;
+                        saisie = true;
+                        tel.CodeType = saisieCT;
                         break;
                     default:
                         Output.WriteLine("Erreur de saisie!");
