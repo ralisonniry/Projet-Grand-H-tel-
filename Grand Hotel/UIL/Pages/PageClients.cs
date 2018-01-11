@@ -145,6 +145,20 @@ namespace UIL
                 TelephoneBOL tel = new TelephoneBOL();
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
                 tel.CodeType= Input.Read<string>("Fixe (F) ou Mobile (M) :");
+                string saisieCT = Console.ReadLine();
+                bool saisie = false;
+                switch (saisieCT)
+                {
+                    case "F":
+                        saisie = true;
+                        break;
+                    case "M":
+                        saisie = false;
+                        break;
+                    default:
+                        Output.WriteLine("Erreur de saisie!");
+                        break;
+                }
                 tel.Pro= Input.Read<bool>("Teléphone professionnel: Oui (0) ou Non (1)");
 
                 //Enregistrement teléphone
