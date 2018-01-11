@@ -18,7 +18,7 @@ namespace DAL
 
         public static Adresse ChercheAdresseClient(int id)
         {
-            throw new NotImplementedException();
+            return DonneesClient.Instance.GetAdress(id);
         }
     }
 
@@ -57,7 +57,7 @@ namespace DAL
 
         #region Dbset
         public DbSet<Client> DClient { get; set; }
-
+        public DbSet<Adresse> DAdresse { get; set; }
 
 
         #endregion
@@ -68,30 +68,14 @@ namespace DAL
         // Charge la lsite des clients
         public List<DAL.Client> AfficheListe()
         {
-            var listeclient = DClient.ToList();
-            List<DAL.Client> liste = new List<Client>();
+            return DClient.ToList();
+        }
 
-            foreach(var c in listeclient)
-            {
-                DAL.Client client1 = new Client();
-
-                client1.Id = c.Id;
-                client1.Nom = c.Nom;
-                client1.Prenom = c.Prenom;
-                client1.CarteFidelite = c.CarteFidelite;
-                client1.Societe = c.Societe;
-                client1.Civilite = c.Civilite;
-
-                liste.Add(client1);
-
-            }
-
-            return liste;
-
-        }               
-
-
-
+        // regarde en local l'adresse du client id
+        public Adresse GetAdress(int id)
+        {
+            return DAdresse.Local.Where(a => a.IdClient == id).FirstOrDefault();
+        }
 
 
 
