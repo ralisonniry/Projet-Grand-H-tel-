@@ -2,6 +2,7 @@
 using Outils.TConsole;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace UIL
             Menu.AddOption("2", "Coordonnées du client", InfoClient);
             Menu.AddOption("3", "Saisir un nouveau client", SaisirClient);
             Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
-
+            Menu.AddOption("5", "Supprimer un client", SupClient);
         }
 
 
@@ -97,6 +98,8 @@ namespace UIL
             cli.Prenom = Input.Read<string>("Prenom");
             cli.CarteFidelite = Input.Read<bool>("0 (Non) ou 1 (Oui) :");
             cli.Societe = Input.Read<string>("Nom (si renseigné) :");
+
+            Metier.Enregister(cli);
             AdresseBOL ad = new AdresseBOL();
             //Saisie adresse client
             Output.WriteLine("Voulez-vous entrer l'adresse du nouveau client : O/N");
@@ -104,12 +107,9 @@ namespace UIL
             if (choix == "O")
             {
                 Output.WriteLine("Veuillez saisir les informations suivantes :");
-
-               // ad.RueEtComplement = Input.Read<string>("Rue et complément :");
+                ad.RueEtComplement = Input.Read<string>("Rue et complément :");
                 ad.CodePostal = Input.Read<string>("Code Postal:");
                 ad.Ville = Input.Read<string>("Ville :");
-
-
 
             }
             else if (choix == "N")
@@ -122,7 +122,7 @@ namespace UIL
                 Output.WriteLine("Erreur de saisie!");
             }
 
-            if (Metier.Enregister(cli) && Metier.Enregister(ad))
+            if (Metier.Enregister(ad))
                 Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
@@ -147,7 +147,7 @@ namespace UIL
 
                 //Enregistrement
                 if (!Metier.Enregister(tel))
-                    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+                    Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau teléphone avec succès");
                 else
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
             }
@@ -157,9 +157,8 @@ namespace UIL
             }
 
 
-
             //Saisie Email 
-            Output.WriteLine("Voulez-vous entrer un N° de téléphone : O/N");
+            Output.WriteLine("Voulez-vous entrer un email : O/N");
             string choixEmail = Console.ReadLine();
 
             if (choixEmail == "O")
@@ -172,14 +171,35 @@ namespace UIL
             {
 
             }
-            if (!Metier.Enregister(cli))
-                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
+            if (!Metier.Enregister(em))
+                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau mail avec succès");
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
 
+        }
+        //----------------------------------------------------------------------
+        //5-Supprimer un client
 
+        public void SupClient()
+        {
+            int id = Input.Read<int>("Id du produit à supprimer :");
+            try
+            {
+                Metier.SupprimerCLient(id);
+            }
+            catch (SqlException e)
+            {
+                GérerErreurSql(e);
+            }
         }
 
-
+        private void GérerErreurSql(SqlException ex)
+        {
+            if (ex.Number == 547)
+                Output.WriteLine(ConsoleColor.Red,
+                    "Le produit ne peut pas être supprimé car il est référencé par une facture et à une occupation de chambre");
+            else
+                throw ex;
+        }
     }
 }
