@@ -12,11 +12,20 @@ namespace UIL
         public PageClients(): base("Page Clients")
         {
             Menu.AddOption("1", "Liste des CLients", AfficherClients);
+            Menu.AddOption("2", "Coordonnées du cLient", InfoClient);
+
+
+        }
+
+        private void InfoClient()
+        {
+            int 
         }
 
         private void AfficherClients()
         {
-            throw new NotImplementedException();
+            var Clients = BOL.GetClients();
+            ConsoleTable.From(Clients).Dispaly("Clients");
         }
     }
 }
