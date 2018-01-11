@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73307086-236D-432A-AA9B-F17ADC8FFC19}</ProjectGuid>
+    <ProjectGuid>{3E2D854C-019A-4BA7-A22D-DA4232D989FC}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>UIL</RootNamespace>
-    <AssemblyName>UIL</AssemblyName>
+    <RootNamespace>GrandHotelApp</RootNamespace>
+    <AssemblyName>GrandHotelApp</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,21 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GrandHotelApp.cs" />
-    <Compile Include="PageClients.cs" />
-    <Compile Include="PageFactures.cs" />
-    <Compile Include="PageResultats.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Outils\Console\TConsole.csproj">
-      <Project>{222ADAFA-6E7D-404C-A04D-DB30BDF702A9}</Project>
-      <Name>TConsole</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
