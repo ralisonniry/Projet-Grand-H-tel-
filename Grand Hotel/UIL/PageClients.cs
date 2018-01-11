@@ -30,7 +30,7 @@ namespace UIL
         //Affichage de la liste des clients
         private void AfficherClients()
         {
-            var Clients = GrandHotelApp.GetClients();
+            var Clients = BOL.GetClients();
             ConsoleTable.From(Clients).Dispaly("Clients");
         }
     }
