@@ -23,15 +23,13 @@ namespace UIL
         private void InfoClient()
         {
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client pour ses coordonnées");
-            _client =  Metier.GetCLient(Id);
+            _client =  (Client)Metier.GetCLient(Id);
 
-            Client c = new Client();
+            List<Client> Clientliste = new List<Client>();
+            Clientliste.Add(_client);
 
-            c.Adresse = _client.Adresse;
-            c.ListeTel = _client.ListeTel;
-            c.ListeEmail = _client.ListeEmail;
 
-            ConsoleTable.From(_client).Display("Coordonnées client");
+            ConsoleTable.From(Clientliste).Display("Coordonnées client");
         }
 
 
