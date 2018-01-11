@@ -13,7 +13,7 @@ namespace UIL
 {
     class PageClients : MenuPage
     {
-        private IList<DAL.Client> _clients;
+        private IList<Client> _clients;
         private object _client;
         public PageClients() : base("Page Clients")
         {
@@ -42,13 +42,31 @@ namespace UIL
             string saisieId = Console.ReadLine();
             _client = Metier.GetCLient(Id);
 
-            
 
-            List<Client> Clientliste = new List<Client>();
-            //Clientliste.Add(_client);
+            //Demande choix Coordonnées
+            Output.WriteLine("Voulez-vous afficher : \n1.son adresse \n2.ses N° de teléphone \n3.ses emails");
+            string saisie = Console.ReadLine();
+            switch (saisie)
+            {
+                case "1":
+                    {
+                        var adresse = Metier.GetAdresse(Id);
+                        ConsoleTable.From(adresse, "Adressse").Display("Adresse");
+                    }
+                    break;
+                case "2":
+                    var tel = Metier.GetTel(Id);
+                    ConsoleTable.From(tel, "Teléphones").Display("Teléphones");
+                    break;
+                case "3":
+                    var email = Metier.GetEmail(Id);
+                    ConsoleTable.From(email, "Emails").Display("Emails");
+                    break;
+                default:
+                    Output.WriteLine("Erreur de saisie!");
+                    break;
+            }
 
-
-            ConsoleTable.From(Clientliste).Display("Coordonnées client: ");
         }
         //----------------------------------------------------------------------
         //3-Saisir un nouveau client
