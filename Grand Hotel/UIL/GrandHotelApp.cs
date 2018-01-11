@@ -1,4 +1,5 @@
-﻿using Outils.TConsole;
+﻿using BOL;
+using Outils.TConsole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace UIL
     class GrandHotelApp:ConsoleApplication
     {
         private static GrandHotelApp _instance;
+        private static IContexteBOL _ContexteBOL;
 
         /// <summary>
         /// Obtient l'instance unique de l'application
@@ -24,6 +26,18 @@ namespace UIL
                 return _instance;
             }
         }
+
+        public static IContexteBOL ContexteBOL
+        {
+            get
+            {
+                if (_ContexteBOL == null) _ContexteBOL = new BOL.BOL();     // maintenant on a juste a modifier ce contexte et on saura quel contexte ça va utiliser
+                return _ContexteBOL;
+            }
+
+        }
+
+
 
         // Constructeur
         public GrandHotelApp()

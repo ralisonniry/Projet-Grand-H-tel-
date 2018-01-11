@@ -22,8 +22,17 @@ namespace BOL
 
     public class Chambre
     {
+        public int Numero { get; set; }
+        public int Etage { get; set; }
+        public bool Bain { get; set; }
+        public bool Douche { get; set; }
+        public bool WC { get; set; }
+        public int NbrLits { get; set; }
+        public int NumTel { get; set; }     // peut etre null
 
-
+        public string CodeTarif { get; set; }
+        public DateTime DateDebut { get; set; }     // selon un temps t, une chambre n'a qu'un prix et un code tarif
+        public decimal Prix { get; set; }
 
         public List<Reservation> ReservationDeLaChambre { get; set; }       // reservations effectuées pour cette chambre
 

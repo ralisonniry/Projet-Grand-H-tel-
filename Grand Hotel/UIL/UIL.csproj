@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContexteBOL.cs" />
     <Compile Include="GrandHotelApp.cs" />
     <Compile Include="PageClients.cs" />
     <Compile Include="PageFactures.cs" />
