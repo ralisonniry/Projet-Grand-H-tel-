@@ -13,7 +13,7 @@ namespace DAL
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class Calendrier
+    public class Calendrier
     {
 
         [Key]

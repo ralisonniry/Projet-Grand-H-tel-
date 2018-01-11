@@ -11,7 +11,7 @@ namespace DAL
     public class BDD 
     {
 
-        public static List<string> AfficheListeClient()
+        public static List<DAL.Client> AfficheListeClient()
         {
             return DonneesClient.Instance.AfficheListe();
         }
@@ -62,9 +62,9 @@ namespace DAL
 
 
 
-        public List<string> AfficheListe()
+        public List<DAL.Client> AfficheListe()
         {
-            var liste = DClient.Select(c => c.Prenom+ "\t" + c.Nom).ToList();
+            var liste = DClient.Select();
 
             return liste;
 

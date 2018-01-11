@@ -14,7 +14,7 @@ namespace DAL
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Telephone
+    public class Telephone
     {
         [Key]
         public string Numero { get; set; }

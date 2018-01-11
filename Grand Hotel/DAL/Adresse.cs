@@ -14,7 +14,7 @@ namespace DAL
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Adresse
+    public class Adresse
     {
         [Key]
         [ForeignKey("Client")]
