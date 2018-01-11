@@ -11,7 +11,7 @@ namespace UIL
     class GrandHotelApp:ConsoleApplication
     {
         private static GrandHotelApp _instance;
-        private static IContexteBOL _ContexteBOL;
+        private static IContexteMetier _ContexteMetier;
 
         /// <summary>
         /// Obtient l'instance unique de l'application
@@ -27,12 +27,12 @@ namespace UIL
             }
         }
 
-        public static IContexteBOL ContexteBOL
+        public static IContexteMetier ContexteMetier
         {
             get
             {
-                if (_ContexteBOL == null) _ContexteBOL = new BOL.BOL();     // maintenant on a juste a modifier ce contexte et on saura quel contexte ça va utiliser
-                return _ContexteBOL;
+                if (_ContexteMetier == null) _ContexteMetier = new Metier.Metier();     // maintenant on a juste a modifier ce contexte et on saura quel contexte ça va utiliser
+                return _ContexteMetier;
             }
 
         }

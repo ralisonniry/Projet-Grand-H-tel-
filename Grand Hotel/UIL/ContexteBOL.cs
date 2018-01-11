@@ -1,6 +1,6 @@
 ﻿namespace UIL
 {
-    public interface IContexteBOL
+    public interface IContexteMetier
     {
     }
 }

@@ -21,17 +21,19 @@ namespace UIL
 
         private void InfoClient()
         {
-            int client = Input.Read<int>("Veuillez saisir l'identifiant du client");
-            var coordonnees =
-            ConsoleTable.From(fournisseurs).Display("Fournisseurs");
+            int Id = Input.Read<int>("Veuillez saisir l'identifiant du client pour ses coordonnées");
+            Metier.GetId(Id);
+
+            var coordonnees =_clients.Where(c=>c.Id == Id).Select(c=>c.Client).FirstOrDefault();
+            ConsoleTable.From(coordonnees).Display("Coordonnées");
         }
 
 
         //Affichage de la liste des clients
         private void AfficherClients()
         {
-            var Clients = BOL.GetClients();
-            ConsoleTable.From(Clients).Dispaly("Clients");
+            _clients = Metier.GetClients();
+            ConsoleTable.From(_clients).Display("Clients");
         }
     }
 }
