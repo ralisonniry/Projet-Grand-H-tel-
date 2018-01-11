@@ -32,8 +32,6 @@ namespace DAL
             return DonneesClient.Instance.GetMail(id);
         }
 
-
-
         public static bool EnregistreClient(Client c)
         {
             return DonneesClient.Instance.SaveClient(c);
