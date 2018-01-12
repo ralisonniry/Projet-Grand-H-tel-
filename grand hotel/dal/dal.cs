@@ -83,6 +83,11 @@ namespace DAL
             return DonneesClient.Instance.SaveFacture (nouvelleFacture);
         }
 
+        public static bool EnregistrerLigne(LigneFacture lf)
+        {
+            return DonneesClient.Instance.SaveLigne (lf);
+        }
+
         // -----------------------------GESTION DES FACTURES--------------------------
 
     }
@@ -221,7 +226,7 @@ namespace DAL
         }
 
         // Suppruime le client dans la BDD
-        internal void SupprimeClient(int id)            // a tester
+        internal void SupprimeClient(int id)         
         {
             try// faudra effacer les adresse, num tel etc, Ssi !!!! pas de reservation
             {
@@ -280,6 +285,20 @@ namespace DAL
             try
             {
                 DFacture.Add(nouvelleFacture);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal bool SaveLigne(LigneFacture lf)
+        {
+            try
+            {
+                DLigneFacture.Add(lf);
                 SaveChanges();
             }
             catch (Exception)
