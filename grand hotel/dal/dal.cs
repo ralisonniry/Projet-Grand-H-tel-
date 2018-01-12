@@ -11,7 +11,7 @@ namespace DAL
     public class BDD 
     {
 
-        public static List<DAL.Client> AfficheListeClient()
+        public static List<Client> AfficheListeClient()
         {
             return DonneesClient.Instance.AfficheListe();
         }
@@ -50,6 +50,11 @@ namespace DAL
         public static bool EnregistreEmail(Email email)
         {
             return DonneesClient.Instance.SaveEmail(email);
+        }
+
+        public static void SupprimerLeClient(int id)
+        {
+            DonneesClient.Instance.SupprimeClient(id);
         }
     }
 
@@ -100,7 +105,7 @@ namespace DAL
         // Charge la lsite des clients
         public List<DAL.Client> AfficheListe()
         {
-            return DClient.ToList();
+            return DClient.AsNoTracking().ToList();
         }
 
         // regarde en local l'adresse du client id
@@ -169,6 +174,7 @@ namespace DAL
             return true;
         }
 
+        // Enregistre le mail id dans la BDD
         internal bool SaveEmail(Email email)
         {
             try
@@ -181,6 +187,46 @@ namespace DAL
                 return false;
             }
             return true;
+        }
+
+        // Suppruime le client dans la BDD
+        internal void SupprimeClient(int id)
+        {
+            try// faudra effacer les adresse, num tel etc, Ssi !!!! pas de reservation
+            {
+                Client c = DClient.Find(id);
+                if (c != null) {
+                    
+                    //Enleve l'adresse reliée
+                    Adresse a = DAdresse.Find(c.Id);
+                    if (a != null)
+                        DAdresse.Remove(a);
+
+                    //Enleve les telephones reliées
+                    List<Telephone> tel = DTelephone.Where(t => t.IdClient == id).ToList();
+                    if (a != null)
+                        foreach(var t in tel)
+                        DTelephone.Remove(t);
+
+                    //Enleve les telephones reliées
+                    List<Email> email = DEmail.Where(t => t.IdClient == id).ToList();
+                    if (a != null)
+                        foreach (var t in email)
+                            DEmail.Remove(t);
+
+
+                    DClient.Remove(c);
+
+                SaveChanges();
+
+
+                }
+
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
     }
 
