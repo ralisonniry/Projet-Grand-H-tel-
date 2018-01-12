@@ -100,10 +100,10 @@ namespace DAL
 
         // -----------------------------RESULTAT HOTEL--------------------------
 
-        public static List<Client> AfficheListeClientSM()
-        {
-            return DonneesClient.Instance.GetListeClientSM();
-        }
+        //public static List<Client> AfficheListeClientSM()
+        //{
+        //    return DonneesClient.Instance.GetListeClientSM();
+        //}
 
 
     }
