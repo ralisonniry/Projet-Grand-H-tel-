@@ -285,6 +285,11 @@ namespace BOL
         {
             throw new NotImplementedException();
         }
+
+        public static void EnregistreFacturesXML(int saisieClient)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 //public static bool Enregister(TelephoneBOL c, int saisieId)
