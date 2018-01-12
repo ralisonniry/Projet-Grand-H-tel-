@@ -262,7 +262,8 @@ namespace DAL
 
         public List<Facture> GetFacture(DateTime saisieDate, int saisieClient)
         {
-            return DFacture.Where(f => f.IdClient == saisieClient && (f.DateFacture >= saisieDate && f.DateFacture < saisieDate.AddYears(1))).ToList();
+            DateTime saisiePlusAnnee = saisieDate.AddYears(1);
+            return DFacture.Where(f => f.IdClient == saisieClient && (f.DateFacture >= saisieDate && f.DateFacture < saisiePlusAnnee)).ToList();
         }
 
         internal List<LigneFacture> GetLigneFacture(int saisieID)

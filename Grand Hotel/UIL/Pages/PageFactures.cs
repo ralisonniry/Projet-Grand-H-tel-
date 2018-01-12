@@ -16,11 +16,15 @@ namespace UIL
             Menu.AddOption("1", "Liste des Factures sur 1 an", AfficherFactureAnnee);
             Menu.AddOption("2", "Ligne Facture (necessite l'id de la facture)", AfficherFactureSelonId);
             Menu.AddOption("3", "Saisir une nouvelle facture", SaisirFacture);
-            //Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
+            Menu.AddOption("4", "Saisir lignes de factures", SaisirligneFacture);
             //Menu.AddOption("5", "Supprimer un client", SupClient);
             //Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
         }
 
+        private void SaisirligneFacture()
+        {
+            throw new NotImplementedException();
+        }
 
         private void AfficherFactureAnnee()
         {
