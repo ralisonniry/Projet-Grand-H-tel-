@@ -64,8 +64,6 @@ namespace DAL
         {
             return DonneesClient.Instance.AfficheListe();
         }
-        // -----------------------------GESTION DES CLIENTS--------------------------
-
 
         // -----------------------------GESTION DES FACTURES--------------------------
         public static List<Facture> ChercheFactureClient(DateTime saisieDate, int saisieClient)
@@ -98,7 +96,15 @@ namespace DAL
             return DonneesClient.Instance.GetListeFacture(saisieClient);
         }
 
-        // -----------------------------GESTION DES FACTURES--------------------------
+
+
+        // -----------------------------RESULTAT HOTEL--------------------------
+
+        public static List<Client> AfficheListeClientSM()
+        {
+            return DonneesClient.Instance.GetListeClientSM();
+        }
+
 
     }
 
@@ -146,7 +152,7 @@ namespace DAL
         #endregion
 
 
-
+        // -----------------------------GESTION DES CLIENTS--------------------------
 
         // Charge la liste des clients
         public List<DAL.Client> AfficheListe()
@@ -345,5 +351,14 @@ namespace DAL
         {
             return DFacture.Where(f => f.IdClient == saisieClient).ToList();
         }
+
+        // -----------------------------RESULTAT HOTEL--------------------------
+        //internal List<Client> GetListeClientSM()
+        //{
+        //    //return DClient.Where(c => c.Telephone.Where( t=> t.CodeType.Contains('M'))).ToList();
+        //    // .DTelephone.Where(t=>t.CodeType!=M).ToList();
+        //}
+
+
     }
 }

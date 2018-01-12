@@ -51,10 +51,6 @@ namespace BOL
             return adressebol;
         }
 
-        public static List<ClientBOL> GetClientsSansMobile()
-        {
-            throw new NotImplementedException();
-        }
 
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
@@ -322,7 +318,6 @@ namespace BOL
         {
             List<Facture> listeFacture = BDD.AfficheListeFacture(saisieClient);
 
-
             List<FactureBOL> factureBOL = new List<FactureBOL>();
             foreach (Facture f in listeFacture)
             {
@@ -349,8 +344,31 @@ namespace BOL
                 xmlserialise.Serialize(sw, factureBOL);
             }
             return true;
-
-
         }
+
+        //-----------------------------RESULTAT DE L'HOTEL--------------
+
+
+        public static List<ClientBOL> GetClientsSansMobile()
+        {
+            List<Client> listeClientSM = BDD.AfficheListeClientSM();
+            List<ClientBOL> listeClientSMBOL = new List<ClientBOL>();
+
+            foreach (Client c in listeClientSM)
+            {
+                ClientBOL client1 = new ClientBOL();
+                client1.Id = c.Id;
+                client1.Nom = c.Nom;
+                client1.Prenom = c.Prenom;
+                client1.CarteFidelite = c.CarteFidelite;
+                client1.Societe = c.Societe;
+                client1.Civilite = c.Civilite;
+
+                listeClientSMBOL.Add(client1);
+            }
+
+            return listeClientSMBOL;
+        }
+
     }
 }
