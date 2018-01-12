@@ -16,9 +16,9 @@ namespace UIL
             Menu.AddOption("1", "Liste des Factures sur 1 an", AfficherFactureAnnee);
             Menu.AddOption("2", "Ligne Facture (necessite l'id de la facture)", AfficherFactureSelonId);
             Menu.AddOption("3", "Saisir une nouvelle facture", SaisirFacture);
-            Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
-            Menu.AddOption("5", "Supprimer un client", SupClient);
-            Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
+            //Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
+            //Menu.AddOption("5", "Supprimer un client", SupClient);
+            //Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
         }
 
 
@@ -102,7 +102,21 @@ namespace UIL
 
                 }
                 else
+                {
+                    //mode de paiement par defaut CB
                     nouvelleFacture.CodeModePaiement = "CB";
+                }
+
+                try
+                {
+                    Metier.SaisirFacture(nouvelleFacture);
+                    Console.WriteLine("Facture Saisie avec succés !");
+
+                }
+                catch(Exception)
+                {
+                    Console.WriteLine("Erreur...");
+                }
 
                 passer = Input.Read<bool>("Voulez-vous enore saisir d'autres factures ? (Oui : true / Non ; false");
 
