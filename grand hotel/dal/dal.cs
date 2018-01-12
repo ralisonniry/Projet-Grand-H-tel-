@@ -91,7 +91,7 @@ namespace DAL
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
 
-        public DonneesClient() : base("name=UIL.Properties.Settings1.GrandHotelChaine")
+        public DonneesClient() : base("name=DAL.Properties.Settings1.GrandHotelChaine")
         {
                 
         }
