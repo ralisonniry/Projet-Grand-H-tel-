@@ -13,6 +13,7 @@ namespace DAL
     // Intermediaire avec BOL
     public class BDD       
     {
+        // -----------------------------GESTION DES CLIENTS--------------------------
 
         public static List<Client> AfficheListeClient()
         {
@@ -59,6 +60,21 @@ namespace DAL
         {
             DonneesClient.Instance.SupprimeClient(id);
         }
+        public static List<Client> AfficheFacture()
+        {
+            return DonneesClient.Instance.AfficheListe();
+        }
+        // -----------------------------GESTION DES CLIENTS--------------------------
+
+
+        // -----------------------------GESTION DES FACTURES--------------------------
+        public static List<Facture> ChercheFactureClient(int id)
+        {
+            return DonneesClient.Instance.GetFacture(id);
+        }
+
+
+        // -----------------------------GESTION DES FACTURES--------------------------
 
     }
 
@@ -100,13 +116,14 @@ namespace DAL
         public DbSet<Telephone> DTelephone { get; set; }
         public DbSet<Adresse> DAdresse { get; set; }
         public DbSet<Email> DEmail { get; set; }
+        public DbSet<Facture> DFacture { get; set; }
 
         #endregion
 
 
 
 
-        // Charge la lsite des clients
+        // Charge la liste des clients
         public List<DAL.Client> AfficheListe()
         {
             return DClient.AsNoTracking().ToList();
@@ -231,6 +248,15 @@ namespace DAL
             {
                 throw;
             }
+        }
+
+        // -----------------------------GESTION DES FACTURES--------------------------
+        // Affiche la liste des factures d'un client
+
+
+        public List<Facture> GetFacture(int id)
+        {
+            return DFacture.Where(f => f.IdClient == id).FirstOrDefault();
         }
     }
 
