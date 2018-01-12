@@ -221,7 +221,7 @@ namespace DAL
         }
 
         // Suppruime le client dans la BDD
-        internal void SupprimeClient(int id)            // a tester
+        internal void SupprimeClient(int id)         
         {
             try// faudra effacer les adresse, num tel etc, Ssi !!!! pas de reservation
             {
