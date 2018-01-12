@@ -6,8 +6,8 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-
-
+using System.Xml.Serialization;
+using System.IO;
 
 namespace BOL
 {
@@ -166,23 +166,39 @@ namespace BOL
 
         public static bool ExporterXml()
         {
+            List<Client> listeDAL = BDD.AfficheListeClient();
 
-            //List<Client> listeDAL = new List<Client>();
-            //foreach(ClientBOL c in liste)
-            //{
-            //    Client client1 = new Client();
-            //    client1.Id = c.Id;
-            //    client1.Nom = c.Nom;
-            //    client1.Prenom = c.Prenom;
-            //    client1.CarteFidelite = c.CarteFidelite;
-            //    client1.Societe = c.Societe;
-            //    client1.Civilite = c.Civilite;
+            List<ClientBOL> listeBOL = new List<ClientBOL>();
+            foreach (Client c in listeDAL)
+            {
+                ClientBOL client1 = new ClientBOL
+                {
+                    Id = c.Id,
+                    Nom = c.Nom,
+                    Prenom = c.Prenom,
+                    CarteFidelite = c.CarteFidelite,
+                    Societe = c.Societe,
+                    Civilite = c.Civilite
+                };
 
-            //    listeDAL.Add(client1);
+                listeBOL.Add(client1);
 
-            //}
+            }
 
-            return BDD.ExporteXMLClient();
+
+            XmlSerializer xmlserialise = new XmlSerializer(typeof(List<ClientBOL>),
+                                         new XmlRootAttribute("ListeClients"));
+
+            using (var sw = new StreamWriter(@"..\..\XML_Liste_Client.xml"))
+            {
+
+                xmlserialise.Serialize(sw, listeBOL);
+
+
+            }
+            return true;
+
+
         }
     }
 }
