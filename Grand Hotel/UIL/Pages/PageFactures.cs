@@ -27,12 +27,19 @@ namespace UIL
             bool passer = false;
             do
             {
-                DateTime saisieDate = Input.Read<DateTime>("A partir de quelle date voulez vous voir les factures ? (jj/mm/aaaa");
 
-                List<FactureBOL> factures = Metier.GetFacture(saisieDate);
+                List<ClientBOL>  clients = Metier.GetClients();
+                ConsoleTable.From(clients, "clients").Display("Clients");
+
+                int saisieClient = Input.Read<int>("De quel client voulez vous voir les factures ? ( Id )");
+
+                DateTime saisieDate = Input.Read<DateTime>("A partir de quelle date voulez vous voir ses factures ? ( jj/mm/aaaa )");
+
+
+                List<FactureBOL> factures = Metier.GetFacture(saisieDate, saisieClient);
                 ConsoleTable.From(factures, "Liste des factures").Display("Liste des factures");
 
-                passer =  Input.Read<bool>("Voulez-vous enore voir d'autres factures ? (Oui : true / Non ; false");
+                passer =  Input.Read<bool>("Voulez-vous enore voir d'autres factures ? ( Oui : true / Non : false )");
 
             } while (passer);
         }
@@ -43,7 +50,7 @@ namespace UIL
             bool passer = false;
             do
             {
-                int saisieID = Input.Read<int>("De quelle facture voulez vous voir les lignes de factures ? ( Id de la facture)");
+                int saisieID = Input.Read<int>("De quelle facture voulez vous voir les lignes de factures ? ( Id de la facture )");
 
                 List<LigneFactureBOL> lignefactures = Metier.GetLignesFactureID(saisieID);
                 ConsoleTable.From(lignefactures, "Ligne de la facture " + saisieID).Display("Ligne de la facture " + saisieID);
