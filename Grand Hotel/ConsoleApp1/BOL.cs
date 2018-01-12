@@ -163,5 +163,10 @@ namespace BOL
         {
             BDD.SupprimerLeClient(id);
         }
+
+        public static bool ExporterXml(List<ClientBOL> liste)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -210,7 +210,7 @@ namespace UIL
             {
                 Metier.SupprimerCLient(id);
             }
-            catch ()
+            catch (Exception)
             {
                 GérerErreurSql();
             }
@@ -218,6 +218,8 @@ namespace UIL
 
         private void GérerErreurSql()
         {
+
+            Output.WriteLine("Erreur ! Client relié à une facture et/ou à une reservation !");
         }
         //----------------------------------------------------------------------
         //6-Sauvegarder la liste des clients
