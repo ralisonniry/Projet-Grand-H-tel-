@@ -10,7 +10,8 @@ using System.IO;
 
 namespace DAL
 {
-    public class BDD 
+    // Intermediaire avec BOL
+    public class BDD       
     {
 
         public static List<Client> AfficheListeClient()
@@ -193,7 +194,7 @@ namespace DAL
         }
 
         // Suppruime le client dans la BDD
-        internal void SupprimeClient(int id)
+        internal void SupprimeClient(int id)            // a tester
         {
             try// faudra effacer les adresse, num tel etc, Ssi !!!! pas de reservation
             {
@@ -207,13 +208,13 @@ namespace DAL
 
                     //Enleve les telephones reliées
                     List<Telephone> tel = DTelephone.Where(t => t.IdClient == id).ToList();
-                    if (a != null)
+                    if (tel != null)
                         foreach(var t in tel)
                         DTelephone.Remove(t);
 
                     //Enleve les telephones reliées
                     List<Email> email = DEmail.Where(t => t.IdClient == id).ToList();
-                    if (a != null)
+                    if (email != null)
                         foreach (var t in email)
                             DEmail.Remove(t);
 
