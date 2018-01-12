@@ -40,7 +40,19 @@ namespace UIL
 
         private void AfficherFactureSelonId()
         {
-            throw new NotImplementedException();
+            bool passer = false;
+            do
+            {
+                int saisieID = Input.Read<int>("De quelle facture voulez vous voir les lignes de factures ? ( Id de la facture)");
+
+                List<LigneFactureBOL> lignefactures = Metier.GetLignesFactureID(saisieID);
+                ConsoleTable.From(lignefactures, "Ligne de la facture " + saisieID).Display("Ligne de la facture " + saisieID);
+
+                passer = Input.Read<bool>("Voulez-vous enore voir d'autres factures ? (Oui : true / Non ; false");
+
+            } while (passer);
+
+
         }
 
 
