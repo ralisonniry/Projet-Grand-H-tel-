@@ -76,6 +76,11 @@ namespace BOL
             return listeBOL;
         }
 
+        public static List<TauxReservation> TauxReservationMois()
+        {
+            throw new NotImplementedException();
+        }
+
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
         public static List<EmailBOL> GetEmail(int id)
@@ -112,6 +117,11 @@ namespace BOL
             return BDD.EnregistreClient(client1);
         }
 
+        public static List<NbrQuotidien> NombreClientAnnee()
+        {
+            throw new NotImplementedException();
+        }
+
         public static bool Enregister(AdresseBOL adresse)
         {
             Adresse adressebol = new Adresse
@@ -123,6 +133,11 @@ namespace BOL
 
             return BDD.EnregistreAdresse(adressebol);
 
+        }
+
+        public static List<ChiffreAffaire> ChiffreAffaireAnnee()
+        {
+            throw new NotImplementedException();
         }
 
         //public static bool Enregister(TelephoneBOL c)
@@ -311,15 +326,15 @@ namespace BOL
             List<FactureBOL> factureBOL = new List<FactureBOL>();
             foreach (Facture f in listeFacture)
             {
-                FactureBOL facture1 = new FactureBOL
-                {
-                    Id = f.Id,
-                    IdClient = f.IdClient,
-                    Datefacture = f.DateFacture,
-                    DatePaiement = f.DatePaiement,
-                    CodeModePaiement = f.CodeModePaiement,
-                    MontantFacture = f.LigneFacture
-                };
+                FactureBOL facture1 = new FactureBOL();
+
+                facture1.Id = f.Id;
+                facture1.IdClient = f.IdClient;
+                facture1.Datefacture = f.DateFacture;
+                facture1.DatePaiement = f.DatePaiement;
+                facture1.CodeModePaiement = f.CodeModePaiement;
+
+                facture1.MontantFacture = f.LigneFacture.Sum(c => (double)c.Quantite * (1 - (double)c.TauxTVA) * (double)c.MontantHT * (1 - (double)c.TauxReduction));
 
                 factureBOL.Add(facture1);
             }
@@ -328,7 +343,7 @@ namespace BOL
             XmlSerializer xmlserialise = new XmlSerializer(typeof(List<FactureBOL>),
                                          new XmlRootAttribute("ListeFactures"));
 
-            using (var sw = new StreamWriter(@"..\..\XML_Liste_Facture.xml"))
+            using (var sw = new StreamWriter(@"..\..\XML_Liste_Facture_Client"+saisieClient+".xml"))
             {
 
                 xmlserialise.Serialize(sw, factureBOL);

@@ -87,6 +87,11 @@ namespace UIL
             }
         }
 
+        private int ientAnnee()
+        {
+            throw new NotImplementedException();
+        }
+
         //	Le chiffre d’affaire de l’hôtel par trimestre de chaque année
         private void ChiffreAffaireAnnee()
         {
