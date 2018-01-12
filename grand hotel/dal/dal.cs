@@ -193,6 +193,7 @@ namespace DAL
             try
             {
                 adressebol.IdClient = DClient.Select(c => c.Id).Max();
+                if(adressebol != null)
                 DAdresse.Add(adressebol);
                 SaveChanges();
             }
