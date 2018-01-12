@@ -87,11 +87,6 @@ namespace UIL
             }
         }
 
-        private int ientAnnee()
-        {
-            throw new NotImplementedException();
-        }
-
         //	Le chiffre d’affaire de l’hôtel par trimestre de chaque année
         private void ChiffreAffaireAnnee()
         {
@@ -107,12 +102,19 @@ namespace UIL
             }
         }
 
-
-
         //	Le nombre de clients dans chaque tranche de 1000 € de chiffre d’affaire total généré. La première tranche est < 5000 €, et la dernière >= 8000 €
         private void NbrClientChiffre()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<NbrClientChiffre> ClientChiffre = Metier.NbrClientChiffre();
+                ConsoleTable.From(ClientChiffre, "  chiffre d’affaire de l’hôtel par trimestre de chaque année ").Display("Nombre quotidien de clients");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Erreur..." + e);
+            }
         }
 
 

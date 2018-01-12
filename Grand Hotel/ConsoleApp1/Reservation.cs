@@ -16,7 +16,6 @@ namespace BOL
         public int Travail { get; set; }            // 0 : non renseigné  / 1 : personnel / 2 : travail
     }
 
-
     public class ChambreBOL
     {
         public int Numero { get; set; }
@@ -35,6 +34,7 @@ namespace BOL
 
     }
 
+    // necessaire pour rendre le taux de réservation moyen
     public class TauxReservation
     {
         public int Mois { get; set; }
@@ -42,6 +42,7 @@ namespace BOL
 
     }
 
+    // necessaire pour rendre le nombre quotidien de client par mois
     public class NbrQuotidien
     {
 
@@ -51,13 +52,19 @@ namespace BOL
 
     }
 
+    //necessaire pour rendre le chiffre d'affaire par mois
     public class ChiffreAffaire
     {
-
         public int TrimerstreAnnee { get; set; }
         public int Chiffre { get; set; }
     }
 
+    // necessaire pour rendre le nombre de client par chiffre d'affaire
+    public class NbrClientChiffre
+    {
+        public double Chiffre { get; set; }
+        public int nbrClient { get; set; }
+    }
 
 
 
