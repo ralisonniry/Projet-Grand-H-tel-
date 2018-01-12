@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Runtime.Remoting.Contexts;
 
 namespace DAL
 {
@@ -59,7 +60,7 @@ namespace DAL
     }
 
 
-    public class DonneesClient : DbContext
+    public class DonneesClient : Context
     {
 
 
