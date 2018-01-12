@@ -122,7 +122,7 @@ namespace DAL
         public DbSet<Adresse> DAdresse { get; set; }
         public DbSet<Email> DEmail { get; set; }
         public DbSet<Facture> DFacture { get; set; }
-        public DbSet<LigneFacture> DLigneFacture { get; private set; }
+        public DbSet<LigneFacture> DLigneFacture { get; set; }
 
         #endregion
 
