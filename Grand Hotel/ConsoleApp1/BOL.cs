@@ -232,6 +232,11 @@ namespace BOL
             return facturebol;
         }
 
+        public static void SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
+        {
+            throw new NotImplementedException();
+        }
+
         public static List<LigneFactureBOL> GetLignesFactureID(int saisieID)
         {
             List<LigneFacture> ligneFacture = BDD.ChercheLigneFacture(saisieID);
@@ -251,9 +256,9 @@ namespace BOL
             return ligneFacturebol;
         }
 
-
-
-
-
+        public static void MiseAJourPaiement(int saisieID, DateTime saisieDatepaiement, string saisieMode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
