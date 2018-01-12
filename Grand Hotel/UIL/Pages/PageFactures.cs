@@ -15,7 +15,7 @@ namespace UIL
         {
             Menu.AddOption("1", "Liste des Factures sur 1 an", AfficherFactureAnnee);
             Menu.AddOption("2", "Ligne Facture (necessite l'id de la facture)", AfficherFactureSelonId);
-            Menu.AddOption("3", "Saisir un nouveau client", SaisirClient);
+            Menu.AddOption("3", "Saisir une nouvelle facture", SaisirFacture);
             Menu.AddOption("4", "Ajouter un N° de téléphone ou une adresse email", ModifClient);
             Menu.AddOption("5", "Supprimer un client", SupClient);
             Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
@@ -37,7 +37,7 @@ namespace UIL
 
 
                 List<FactureBOL> factures = Metier.GetFacture(saisieDate, saisieClient);
-                ConsoleTable.From(factures, "Liste des factures").Display("Liste des factures");
+                ConsoleTable.From(factures, "Liste des factures du client" + saisieClient +" jusqu'a 1 an, à partir de " + saisieDate).Display("Liste des factures");
 
                 passer =  Input.Read<bool>("Voulez-vous enore voir d'autres factures ? ( Oui : true / Non : false )");
 
@@ -59,8 +59,56 @@ namespace UIL
 
             } while (passer);
 
-
         }
+
+
+        private void SaisirFacture()
+        {
+            bool passer = false;
+            bool modepaiment = false;
+            do
+            {
+                FactureBOL nouvelleFacture = new FactureBOL();
+
+
+                nouvelleFacture.IdClient = Input.Read<int>("Quel est l'id du client");
+                nouvelleFacture.Datefacture = Input.Read<DateTime>("Quel est la date de la facture");
+                if (Input.Read<bool>("Le client a deja payé ? ( Oui : true / Non : false )"))
+                {
+                    nouvelleFacture.DatePaiement = Input.Read<DateTime>("Quel est la date de paiement ?");
+                    do
+                    {
+                        // saisie du mode de paiement
+                        string saisieMode = Input.Read<string>("Quel etait le mode de paiement ? ( CB / CHQ / ESP )");
+                        switch (saisieMode)
+                        {
+                            case "CB":
+                                nouvelleFacture.CodeModePaiement = saisieMode;
+
+                                modepaiment = true;
+                                break;
+                            case "CHQ":
+                                nouvelleFacture.CodeModePaiement = saisieMode;
+                                modepaiment = true;
+                                break;
+                            case "ESP":
+                                nouvelleFacture.CodeModePaiement = saisieMode;
+                                modepaiment = true;
+                                break;
+                            default:
+                                break;
+                        }
+                    } while (!modepaiment);
+
+                }
+                else
+                    nouvelleFacture.CodeModePaiement = "CB";
+
+                passer = Input.Read<bool>("Voulez-vous enore saisir d'autres factures ? (Oui : true / Non ; false");
+
+            } while (passer);
+        }
+
 
 
 
