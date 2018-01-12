@@ -18,8 +18,10 @@ namespace UIL
             Menu.AddOption("3", "Saisir une nouvelle facture", SaisirFacture);
             Menu.AddOption("4", "Saisir lignes de factures selon l'id de la facture", SaisirligneFacture);
             Menu.AddOption("5", "Mettre à jour le paiement d'une facture", PaiementFacture);
-            //Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
+            Menu.AddOption("6", "Enregistrer un fichier xml contenant les factures d'un client ( idClient necessaire )", SauveFactureClient);
         }
+
+
 
 
         //	Afficher la liste des factures d’un client à partir d’une date donnée (par défaut sur un an glissant) 
@@ -173,15 +175,30 @@ namespace UIL
                 switch (saisieMode)
                 {
                     case "CB":
-                        Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                        try
+                        {
+                            Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                            Console.WriteLine("Validé !");
+                        }
+                        catch (Exception e) { Console.WriteLine("Erreur..." + e); }
                         modepaiment = true;
                         break;
                     case "CHQ":
-                        Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                        try
+                        {
+                            Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                            Console.WriteLine("Validé !");
+                        }
+                        catch (Exception e) { Console.WriteLine("Erreur..." + e); }
                         modepaiment = true;
                         break;
                     case "ESP":
-                        Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                        try
+                        {
+                            Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                            Console.WriteLine("Validé !");
+                        }
+                        catch (Exception e) { Console.WriteLine("Erreur..." + e); }
                         modepaiment = true;
                         break;
                     default:
@@ -189,6 +206,27 @@ namespace UIL
                 }
             } while (!modepaiment);
         }
+
+        //Exporter les factures d’un client donné au format xml, sans le détail des lignes, mais avec le montant total de la facture
+        private void SauveFactureClient()
+        {
+
+            List<ClientBOL> clients = Metier.GetClients();
+            ConsoleTable.From(clients, "clients").Display("Clients");
+
+            int saisieClient = Input.Read<int>("De quel client voulez vous enregistrer les factures ? ( Id )");
+
+            try
+            {
+                Metier.EnregistreFacturesXML(saisieClient);
+                Console.WriteLine("Validé !");
+            }
+            catch (Exception e) { Console.WriteLine("Erreur..." + e); }
+        }
+
+
+
+
     }
 
 

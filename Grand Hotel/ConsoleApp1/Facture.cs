@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,10 @@ namespace BOL
         public int IdClient { get; set; }
         public DateTime Datefacture { get; set; }
         public Nullable<DateTime> DatePaiement { get; set; }
-        public string CodeModePaiement { get; set; }        // peut etre nul
+        public string CodeModePaiement { get; set; }        
 
-
+        [Display(ShortName ="None")]
+        public double MontantFacture { get; set; }
 
     }
 
