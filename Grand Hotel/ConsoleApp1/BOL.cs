@@ -235,7 +235,20 @@ namespace BOL
         public static List<LigneFactureBOL> GetLignesFactureID(int saisieID)
         {
             List<LigneFacture> ligneFacture = BDD.ChercheLigneFacture(saisieID);
-            List<FactureBOL> facturebol = new List<FactureBOL>();
+            List<LigneFactureBOL> ligneFacturebol = new List<LigneFactureBOL>();
+
+            foreach (LigneFacture lf in ligneFacture)
+            {
+                LigneFactureBOL ligneFacture1 = new LigneFactureBOL();
+                ligneFacture1.NumLigne = lf.NumLigne;
+                ligneFacture1.Quantite = lf.Quantite;
+                ligneFacture1.MontantHT = lf.MontantHT;
+                ligneFacture1.TauxTVA = lf.TauxTVA;
+                ligneFacture1.TauxReduction = lf.TauxReduction;
+
+                ligneFacturebol.Add(ligneFacture1);
+            }
+            return ligneFacturebol;
         }
 
 
