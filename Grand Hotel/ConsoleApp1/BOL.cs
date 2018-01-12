@@ -349,26 +349,26 @@ namespace BOL
         //-----------------------------RESULTAT DE L'HOTEL--------------
 
 
-        public static List<ClientBOL> GetClientsSansMobile()
-        {
-            List<Client> listeClientSM = BDD.AfficheListeClientSM();
-            List<ClientBOL> listeClientSMBOL = new List<ClientBOL>();
+        //public static List<ClientBOL> GetClientsSansMobile()
+        //{
+        //    List<Client> listeClientSM = BDD.AfficheListeClientSM();
+        //    List<ClientBOL> listeClientSMBOL = new List<ClientBOL>();
 
-            foreach (Client c in listeClientSM)
-            {
-                ClientBOL client1 = new ClientBOL();
-                client1.Id = c.Id;
-                client1.Nom = c.Nom;
-                client1.Prenom = c.Prenom;
-                client1.CarteFidelite = c.CarteFidelite;
-                client1.Societe = c.Societe;
-                client1.Civilite = c.Civilite;
+        //    foreach (Client c in listeClientSM)
+        //    {
+        //        ClientBOL client1 = new ClientBOL();
+        //        client1.Id = c.Id;
+        //        client1.Nom = c.Nom;
+        //        client1.Prenom = c.Prenom;
+        //        client1.CarteFidelite = c.CarteFidelite;
+        //        client1.Societe = c.Societe;
+        //        client1.Civilite = c.Civilite;
 
-                listeClientSMBOL.Add(client1);
-            }
+        //        listeClientSMBOL.Add(client1);
+        //    }
 
-            return listeClientSMBOL;
-        }
+        //    return listeClientSMBOL;
+        //}
 
     }
 }

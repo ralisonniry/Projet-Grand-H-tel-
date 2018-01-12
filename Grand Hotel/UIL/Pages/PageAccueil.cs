@@ -18,8 +18,8 @@ namespace UIL
             () => GrandHotelApp.Instance.NavigateTo(typeof(PageClients)));
             Menu.AddOption("2", "Factures",
             () => GrandHotelApp.Instance.NavigateTo(typeof(PageFactures)));
-            Menu.AddOption("3", "Informations GrandHotel",
-            () => GrandHotelApp.Instance.NavigateTo(typeof(PageResultats)));
+            //Menu.AddOption("3", "Informations GrandHotel",
+            //() => GrandHotelApp.Instance.NavigateTo(typeof(PageResultats)));
 
 
         }
