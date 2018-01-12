@@ -164,9 +164,25 @@ namespace BOL
             BDD.SupprimerLeClient(id);
         }
 
-        public static bool ExporterXml(List<ClientBOL> liste)
+        public static bool ExporterXml()
         {
-            throw new NotImplementedException();
+
+            //List<Client> listeDAL = new List<Client>();
+            //foreach(ClientBOL c in liste)
+            //{
+            //    Client client1 = new Client();
+            //    client1.Id = c.Id;
+            //    client1.Nom = c.Nom;
+            //    client1.Prenom = c.Prenom;
+            //    client1.CarteFidelite = c.CarteFidelite;
+            //    client1.Societe = c.Societe;
+            //    client1.Civilite = c.Civilite;
+
+            //    listeDAL.Add(client1);
+
+            //}
+
+            return BDD.ExporteXMLClient();
         }
     }
 }
