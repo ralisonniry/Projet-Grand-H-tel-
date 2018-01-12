@@ -15,7 +15,7 @@ namespace BOL
         public Nullable<DateTime> DatePaiement { get; set; }
         public string CodeModePaiement { get; set; }        // peut etre nul
 
-        public List<LigneFactureBOL> ListeFacture { get; set; }
+
 
     }
 
