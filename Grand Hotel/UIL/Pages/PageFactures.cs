@@ -139,7 +139,7 @@ namespace UIL
 
                 LigneFactureBOL nouvelleLigneFacture = new LigneFactureBOL
                 {
-                    Quantite = Input.Read<int>("Quel est la quantité du service fourni"),
+                    Quantite = Input.Read<short>("Quel est la quantité du service fourni"),
                     MontantHT = Input.Read<decimal>("Quel est la montant du service fourni"),
                     TauxTVA = Input.Read<decimal>("Quel est le taux TVA du service fourni"),
                     TauxReduction = Input.Read<decimal>("Quel est le taux de reduction du service fourni")

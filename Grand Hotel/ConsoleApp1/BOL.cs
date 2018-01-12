@@ -51,6 +51,11 @@ namespace BOL
             return adressebol;
         }
 
+        public static List<ClientBOL> GetClientsSansMobile()
+        {
+            throw new NotImplementedException();
+        }
+
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
         public static List<TelephoneBOL> GetTel(int id)

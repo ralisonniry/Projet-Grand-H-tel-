@@ -22,7 +22,7 @@ namespace DAL
         public int IdFacture { get; set; }
         [Key, Column(Order = 1)]
         public int NumLigne { get; set; }
-        public int Quantite { get; set; }
+        public short Quantite { get; set; }
         public decimal MontantHT { get; set; }
         public decimal TauxTVA { get; set; }
         public decimal TauxReduction { get; set; }
