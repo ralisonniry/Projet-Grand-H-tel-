@@ -17,9 +17,10 @@ namespace UIL
             Menu.AddOption("2", "Ligne Facture (necessite l'id de la facture)", AfficherFactureSelonId);
             Menu.AddOption("3", "Saisir une nouvelle facture", SaisirFacture);
             Menu.AddOption("4", "Saisir lignes de factures selon l'id de la facture", SaisirligneFacture);
-            //Menu.AddOption("5", "Supprimer un client", SupClient);
+            Menu.AddOption("5", "Mettre à jour le paiement d'une facture", PaiementFacture);
             //Menu.AddOption("6", "Sauvegarder la liste des clients", SauveClient);
         }
+
 
         //	Afficher la liste des factures d’un client à partir d’une date donnée (par défaut sur un an glissant) 
         private void AfficherFactureAnnee()
@@ -28,7 +29,7 @@ namespace UIL
             do
             {
 
-                List<ClientBOL>  clients = Metier.GetClients();
+                List<ClientBOL> clients = Metier.GetClients();
                 ConsoleTable.From(clients, "clients").Display("Clients");
 
                 int saisieClient = Input.Read<int>("De quel client voulez vous voir les factures ? ( Id )");
@@ -37,9 +38,9 @@ namespace UIL
 
 
                 List<FactureBOL> factures = Metier.GetFacture(saisieDate, saisieClient);
-                ConsoleTable.From(factures, "Liste des factures du client" + saisieClient +" jusqu'a 1 an, à partir de " + saisieDate).Display("Liste des factures");
+                ConsoleTable.From(factures, "Liste des factures du client" + saisieClient + " jusqu'a 1 an, à partir de " + saisieDate).Display("Liste des factures");
 
-                passer =  Input.Read<bool>("Voulez-vous enore voir d'autres factures ? ( Oui : true / Non : false )");
+                passer = Input.Read<bool>("Voulez-vous enore voir d'autres factures ? ( Oui : true / Non : false )");
 
             } while (passer);
         }
@@ -77,7 +78,7 @@ namespace UIL
                 nouvelleFacture.Datefacture = Input.Read<DateTime>("Quel est la date de la facture");
                 if (Input.Read<bool>("Le client a deja payé ? ( Oui : true / Non : false )"))
                 {
-                    nouvelleFacture.DatePaiement = Input.Read<DateTime>("Quel est la date de paiement ?");
+                    nouvelleFacture.DatePaiement = Input.Read<DateTime>("Quel est la date de paiement ? ( jj/mm/aaaa )");
                     do
                     {
                         // saisie du mode de paiement
@@ -115,7 +116,7 @@ namespace UIL
                     Console.WriteLine("Facture Saisie avec succés !");
 
                 }
-                catch(Exception e )
+                catch (Exception e)
                 {
                     Console.WriteLine("Erreur..." + e);
                 }
@@ -158,19 +159,51 @@ namespace UIL
         }
 
         // 	Mettre à jour la date et le mode de paiement d’une facture
+        private void PaiementFacture()
+        {
+            bool modepaiment = false;
 
+            int saisieID = Input.Read<int>("De quelle facture voulez vous mettre à jour le paiement ? ( Id de la facture )");
 
+            DateTime saisieDatepaiement = Input.Read<DateTime>("Quel est la date de paiement ? ( jj/mm/aaaa )");
 
-
-
-
-
-
-
-
+            do
+            {
+                string saisieMode = Input.Read<string>("Quel etait le mode de paiement ? ( CB / CHQ / ESP )");
+                switch (saisieMode)
+                {
+                    case "CB":
+                        Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                        modepaiment = true;
+                        break;
+                    case "CHQ":
+                        Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                        modepaiment = true;
+                        break;
+                    case "ESP":
+                        Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
+                        modepaiment = true;
+                        break;
+                    default:
+                        break;
+                }
+            } while (!modepaiment);
+        }
 
 
     }
 
 
+
+
+
+
+
+
+
+
+
 }
+
+
+
