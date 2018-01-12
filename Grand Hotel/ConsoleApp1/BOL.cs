@@ -161,10 +161,6 @@ namespace BOL
             return BDD.EnregistreEmail(email);
         }
 
-        public static void SaisirFacture(FactureBOL nouvelleFacture)
-        {
-            throw new NotImplementedException();
-        }
 
         public static void SupprimerCLient(int id)
         {
@@ -225,17 +221,14 @@ namespace BOL
                 facture1.IdClient = f.IdClient;
                 facture1.Datefacture = f.DateFacture;
                 facture1.DatePaiement = f.DatePaiement;
-                facture1.CodeModePaiement= f.CodeModePaiement;
+                facture1.CodeModePaiement = f.CodeModePaiement;
 
                 facturebol.Add(facture1);
             }
             return facturebol;
         }
 
-        public static void SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
-        {
-            throw new NotImplementedException();
-        }
+        //Afficher les lignes d'une facture identifiée par son Id
 
         public static List<LigneFactureBOL> GetLignesFactureID(int saisieID)
         {
@@ -256,9 +249,54 @@ namespace BOL
             return ligneFacturebol;
         }
 
+
+
+        //Saisir une facture
+        public static bool SaisirFacture(FactureBOL nouvelleFacture)
+        {
+            Facture nouvelleFacture1 = new Facture
+            {
+                IdClient = nouvelleFacture.IdClient,
+                DateFacture = nouvelleFacture.Datefacture,
+                DatePaiement = nouvelleFacture.DatePaiement,
+                CodeModePaiement = nouvelleFacture.CodeModePaiement
+            };
+
+            return BDD.EnregistrerFacture(nouvelleFacture1);
+        }
+
+        //Saisir les lignes d'une facture donnée
+        public static bool SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
+        {
+            LigneFacture lf = new LigneFacture
+            {
+               NumLigne = nouvelleLigneFacture.NumLigne,
+               Quantite = nouvelleLigneFacture.Quantite,
+               MontantHT = nouvelleLigneFacture.MontantHT,
+               TauxTVA = nouvelleLigneFacture.TauxTVA,
+               TauxReduction = nouvelleLigneFacture.TauxReduction
+            };
+
+            return BDD.EnregistrerLigne(lf);
+        }
+
+        //Mettre à jour la date et le mode de paiement d'une facture
         public static void MiseAJourPaiement(int saisieID, DateTime saisieDatepaiement, string saisieMode)
         {
             throw new NotImplementedException();
         }
     }
 }
+//public static bool Enregister(TelephoneBOL c, int saisieId)
+//{
+//    Telephone tele = new Telephone
+//    {
+//        Numero = c.Numero,
+//        Pro = c.Pro,
+//        CodeType = c.CodeType,
+//        IdClient = saisieId
+
+//    };
+
+//    return BDD.EnregistreTelephone(tele);
+//}
