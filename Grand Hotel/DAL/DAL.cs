@@ -11,7 +11,7 @@ using System.IO;
 namespace DAL
 {
     // Intermediaire avec BOL
-    public class BDD       
+    public class BDD
     {
         // -----------------------------GESTION DES CLIENTS--------------------------
 
@@ -78,14 +78,14 @@ namespace DAL
             return DonneesClient.Instance.GetLigneFacture(saisieID);
         }
 
-        public static bool EnregistrerFacture(Facture nouvelleFacture)
+        public static void EnregistrerFacture(Facture nouvelleFacture)
         {
-            return DonneesClient.Instance.SaveFacture (nouvelleFacture);
+            DonneesClient.Instance.SaveFacture(nouvelleFacture);
         }
 
-        public static bool EnregistrerLigne(LigneFacture lf)
+        public static void EnregistrerLigne(LigneFacture lf)
         {
-            return DonneesClient.Instance.SaveLigne (lf);
+            DonneesClient.Instance.SaveLigne(lf);
         }
 
         // -----------------------------GESTION DES FACTURES--------------------------
@@ -107,7 +107,7 @@ namespace DAL
 
         public DonneesClient() : base("name=DAL.Properties.Settings1.GrandHotelChaine")
         {
-                
+
         }
 
         public static DonneesClient Instance
@@ -153,7 +153,7 @@ namespace DAL
         // regarde en local le tel du client id
         public List<Telephone> GetTel(int id)
         {
-            return DTelephone.Where(t=> t.IdClient == id).ToList();
+            return DTelephone.Where(t => t.IdClient == id).ToList();
         }
 
         // regarde en local le mail du client id
@@ -198,8 +198,8 @@ namespace DAL
         {
             try
             {
-                if(tele.IdClient == 0)
-                tele.IdClient = DClient.Select(c => c.Id).Max();
+                if (tele.IdClient == 0)
+                    tele.IdClient = DClient.Select(c => c.Id).Max();
                 DTelephone.Add(tele);
                 SaveChanges();
             }
@@ -226,13 +226,14 @@ namespace DAL
         }
 
         // Suppruime le client dans la BDD
-        internal void SupprimeClient(int id)         
+        internal void SupprimeClient(int id)
         {
             try// faudra effacer les adresse, num tel etc, Ssi !!!! pas de reservation
             {
                 Client c = DClient.Find(id);
-                if (c != null) {
-                    
+                if (c != null)
+                {
+
                     //Enleve l'adresse reliée
                     Adresse a = DAdresse.Find(c.Id);
                     if (a != null)
@@ -241,8 +242,8 @@ namespace DAL
                     //Enleve les telephones reliées
                     List<Telephone> tel = DTelephone.Where(t => t.IdClient == id).ToList();
                     if (tel != null)
-                        foreach(var t in tel)
-                        DTelephone.Remove(t);
+                        foreach (var t in tel)
+                            DTelephone.Remove(t);
 
                     //Enleve les telephones reliées
                     List<Email> email = DEmail.Where(t => t.IdClient == id).ToList();
@@ -253,13 +254,13 @@ namespace DAL
 
                     DClient.Remove(c);
 
-                SaveChanges();
+                    SaveChanges();
 
 
                 }
 
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -277,36 +278,43 @@ namespace DAL
 
         public List<LigneFacture> GetLigneFacture(int saisieID)
         {
-            return DLigneFacture.Where(f => f.IdFacture== saisieID).ToList();
+            return DLigneFacture.Where(f => f.IdFacture == saisieID).ToList();
         }
 
-        internal bool SaveFacture(Facture nouvelleFacture)
+        internal void SaveFacture(Facture nouvelleFacture)
         {
             try
             {
+                
                 DFacture.Add(nouvelleFacture);
                 SaveChanges();
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
-            return true;
+
         }
 
-        internal bool SaveLigne(LigneFacture lf)
+        internal void SaveLigne(LigneFacture lf)
         {
             try
             {
+                lf.NumLigne = 1;
+                try
+                {
+                lf.NumLigne = DLigneFacture.Where(c => c.IdFacture == lf.IdFacture).Max(c => c.NumLigne) + 1;
+
+                }
+                catch (Exception) {  }
                 DLigneFacture.Add(lf);
                 SaveChanges();
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
-            return true;
         }
-    }
 
+    }
 }

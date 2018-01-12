@@ -252,7 +252,7 @@ namespace BOL
 
 
         //Saisir une facture
-        public static bool SaisirFacture(FactureBOL nouvelleFacture)
+        public static void SaisirFacture(FactureBOL nouvelleFacture)
         {
             Facture nouvelleFacture1 = new Facture
             {
@@ -262,11 +262,11 @@ namespace BOL
                 CodeModePaiement = nouvelleFacture.CodeModePaiement
             };
 
-            return BDD.EnregistrerFacture(nouvelleFacture1);
+             BDD.EnregistrerFacture(nouvelleFacture1);
         }
 
         //Saisir les lignes d'une facture donnée
-        public static bool SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
+        public static void SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
         {
             LigneFacture lf = new LigneFacture
             {
@@ -278,7 +278,7 @@ namespace BOL
                
             };
 
-            return BDD.EnregistrerLigne(lf);
+            BDD.EnregistrerLigne(lf);
         }
 
 
