@@ -73,6 +73,11 @@ namespace DAL
             return DonneesClient.Instance.GetFacture(saisieDate, saisieClient);
         }
 
+        public static List<LigneFacture> ChercheLigneFacture(int saisieID)
+        {
+            return DonneesClient.Instance.GetLigneFacture(saisieID);
+        }
+
 
         // -----------------------------GESTION DES FACTURES--------------------------
 
@@ -117,6 +122,7 @@ namespace DAL
         public DbSet<Adresse> DAdresse { get; set; }
         public DbSet<Email> DEmail { get; set; }
         public DbSet<Facture> DFacture { get; set; }
+        public DbSet<Facture> DLigneFacture { get; private set; }
 
         #endregion
 
@@ -258,6 +264,11 @@ namespace DAL
         {
             DateTime saisiePlusAnnee = saisieDate.AddYears(1);
             return DFacture.Where(f => f.IdClient == saisieClient && (f.DateFacture >= saisieDate && f.DateFacture < saisiePlusAnnee)).ToList();
+        }
+
+        internal List<LigneFacture> GetLigneFacture(int saisieID)
+        {
+            return DLigneFacture.Where(f => f.IdClient == saisieID).ToList();
         }
     }
 
