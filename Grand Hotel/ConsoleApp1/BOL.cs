@@ -203,7 +203,19 @@ namespace BOL
 
         #endregion
 
+        //-----------------------------GESTION DES FACTURES--------------
+        // Cherche les factures  selon l'id et renvoie la liste des adresses de ce dernier
+        public static AdresseBOL GetFacture(int id)
+        {
+            DAL.Facture facture = BDD.ChercheFactureClient(id);
+            FactureBOL facturebol = new factureBOL();
 
+            adressebol.RueEtComplement = adresse.Rue + "\t" + adresse.Complement;
+            adressebol.CodePostal = adresse.CodePostal;
+            adressebol.Ville = adresse.Ville;
+
+            return adressebol;
+        }
 
 
 
