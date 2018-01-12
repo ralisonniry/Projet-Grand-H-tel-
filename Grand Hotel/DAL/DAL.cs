@@ -88,6 +88,11 @@ namespace DAL
             DonneesClient.Instance.SaveLigne(lf);
         }
 
+        public static void EnregistrerMAJ(Facture facture)
+        {
+            DonneesClient.Instance.SaveMAJ(facture);
+        }
+
         // -----------------------------GESTION DES FACTURES--------------------------
 
     }
@@ -281,11 +286,11 @@ namespace DAL
             return DLigneFacture.Where(f => f.IdFacture == saisieID).ToList();
         }
 
-        internal void SaveFacture(Facture nouvelleFacture)
+        public void SaveFacture(Facture nouvelleFacture)
         {
             try
             {
-                
+
                 DFacture.Add(nouvelleFacture);
                 SaveChanges();
             }
@@ -296,17 +301,17 @@ namespace DAL
 
         }
 
-        internal void SaveLigne(LigneFacture lf)
+        public void SaveLigne(LigneFacture lf)
         {
             try
             {
                 lf.NumLigne = 1;
                 try
                 {
-                lf.NumLigne = DLigneFacture.Where(c => c.IdFacture == lf.IdFacture).Max(c => c.NumLigne) + 1;
+                    lf.NumLigne = DLigneFacture.Where(c => c.IdFacture == lf.IdFacture).Max(c => c.NumLigne) + 1;
 
                 }
-                catch (Exception) {  }
+                catch (Exception) { }
                 DLigneFacture.Add(lf);
                 SaveChanges();
             }
@@ -316,5 +321,10 @@ namespace DAL
             }
         }
 
+        public void SaveMAJ(Facture facture)
+        {
+            DFacture.Add(facture);
+            SaveChanges();
+        }
     }
 }

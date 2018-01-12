@@ -285,25 +285,30 @@ namespace BOL
         //Mettre à jour la date et le mode de paiement d'une facture
         public static void MiseAJourPaiement(int saisieID, DateTime saisieDatepaiement, string saisieMode)
         {
-            throw new NotImplementedException();
+            Facture facture = new Facture
+            {
+                Id = saisieID,
+                DatePaiement = saisieDatepaiement,
+                CodeModePaiement = saisieMode
+            };
+
+            BDD.EnregistrerMAJ(facture);
         }
 
+        //Exporter factures en XML
         public static void EnregistreFacturesXML(int saisieClient)
         {
             throw new NotImplementedException();
         }
     }
 }
-//public static bool Enregister(TelephoneBOL c, int saisieId)
+//Telephone tele = new Telephone
 //{
-//    Telephone tele = new Telephone
-//    {
-//        Numero = c.Numero,
-//        Pro = c.Pro,
-//        CodeType = c.CodeType,
-//        IdClient = saisieId
+//    Numero = c.Numero,
+//    Pro = c.Pro,
+//    CodeType = c.CodeType,
+//    IdClient = saisieId
 
-//    };
+//};
 
-//    return BDD.EnregistreTelephone(tele);
-//}
+//            return BDD.EnregistreTelephone(tele);
