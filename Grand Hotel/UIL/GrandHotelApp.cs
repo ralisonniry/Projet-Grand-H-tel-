@@ -1,4 +1,4 @@
-﻿using BOL;
+﻿
 using Outils.TConsole;
 using System;
 using System.Collections.Generic;
