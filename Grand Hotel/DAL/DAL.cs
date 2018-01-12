@@ -78,6 +78,10 @@ namespace DAL
             return DonneesClient.Instance.GetLigneFacture(saisieID);
         }
 
+        public static bool EnregistrerFacture(Facture nouvelleFacture)
+        {
+            return DonneesClient.Instance.SaveFacture (nouvelleFacture);
+        }
 
         // -----------------------------GESTION DES FACTURES--------------------------
 
@@ -270,9 +274,20 @@ namespace DAL
         {
             return DLigneFacture.Where(f => f.IdFacture== saisieID).ToList();
         }
+
+        internal bool SaveFacture(Facture nouvelleFacture)
+        {
+            try
+            {
+                DFacture.Add(nouvelleFacture);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
     }
-
-
-
 
 }
