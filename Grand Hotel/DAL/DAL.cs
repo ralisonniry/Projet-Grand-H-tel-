@@ -323,8 +323,18 @@ namespace DAL
 
         public void SaveMAJ(Facture facture)
         {
-            DFacture.Add(facture);
-            SaveChanges();
+            Facture factureAModifier = DFacture.Find(facture.Id);
+            try
+            {
+                factureAModifier.DatePaiement = facture.DatePaiement;
+                factureAModifier.CodeModePaiement = facture.CodeModePaiement;
+
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

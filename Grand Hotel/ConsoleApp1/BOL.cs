@@ -302,13 +302,3 @@ namespace BOL
         }
     }
 }
-//Telephone tele = new Telephone
-//{
-//    Numero = c.Numero,
-//    Pro = c.Pro,
-//    CodeType = c.CodeType,
-//    IdClient = saisieId
-
-//};
-
-//            return BDD.EnregistreTelephone(tele);
