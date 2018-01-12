@@ -53,7 +53,7 @@ namespace UIL
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erreur..." + e);
+                Output.WriteLine(ConsoleColor.Red, "Erreur..." + e);
             }
 
         }
@@ -83,7 +83,7 @@ namespace UIL
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erreur..." + e);
+                Output.WriteLine(ConsoleColor.Red, "Erreur..." + e);
             }
         }
 
@@ -98,27 +98,24 @@ namespace UIL
             }
             catch (Exception e)
             {
-                Console.WriteLine("Erreur..." + e);
+                Output.WriteLine(ConsoleColor.Red, "Erreur..." + e);
             }
         }
 
         //	Le nombre de clients dans chaque tranche de 1000 € de chiffre d’affaire total généré. La première tranche est < 5000 €, et la dernière >= 8000 €
         private void NbrClientChiffre()
         {
-            try
-            {
-                List<NbrClientChiffre> ClientChiffre = Metier.NbrClientChiffre();
-                ConsoleTable.From(ClientChiffre, "  chiffre d’affaire de l’hôtel par trimestre de chaque année ").Display("Nombre quotidien de clients");
+            //try
+            //{
+            //    List<NbrClientChiffre> ClientChiffre = Metier.NbrClientChiffre();
+            //    ConsoleTable.From(ClientChiffre, "  chiffre d’affaire de l’hôtel par trimestre de chaque année ").Display("Nombre quotidien de clients");
 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Erreur..." + e);
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Output.WriteLine(ConsoleColor.Red, "Erreur..." + e);
+            //}
         }
-
-
-
 
 
     }

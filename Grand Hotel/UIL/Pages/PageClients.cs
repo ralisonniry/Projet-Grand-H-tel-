@@ -14,8 +14,8 @@ namespace UIL
 {
     class PageClients : MenuPage
     {
-        private IList<ClientBOL> _clients;
-        private ClientBOL _client;
+        private List<ClientBOL> _clients;
+
         public PageClients() : base("Page Clients")
         {
             Menu.AddOption("1", "Liste des cLients", AfficherClients);
@@ -43,10 +43,8 @@ namespace UIL
             //Saisie Identifiant Client
             int Id = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
 
-
             //Demande choix Coordonnées
-            Output.WriteLine("Voulez-vous afficher : \n1.son adresse \n2.ses N° de teléphone \n3.ses emails");
-            string saisie = Console.ReadLine();
+            string saisie = Input.Read<string>("Voulez-vous afficher : \n1.son adresse \n2.ses N° de teléphone \n3.ses emails");
             switch (saisie)
             {
                 case "1":
@@ -69,65 +67,56 @@ namespace UIL
                     Output.WriteLine("Erreur de saisie!");
                     break;
             }
-
         }
+
         //----------------------------------------------------------------------
         //3-Saisir un nouveau client
         public void SaisirClient()
         {
-            Output.WriteLine("Voulez-vous entrer un nouveau client : \n1.Oui \n2.Non");
-            string saisieClient = Console.ReadLine();
-            bool saisie = false;
-            switch (saisieClient)
+
+            Output.WriteLine("Saisissez les informations du nouveau client :\n");
+            ClientBOL cli = new ClientBOL
             {
-                case "1":
-                    saisie = true;
-                    break;
-                case "2":
-                    saisie = false;
-                    break;
-                default:
+                Civilite = Input.Read<string>("Civilité (M/Mlle/Mme) :"),
+                Nom = Input.Read<string>("Nom :"),
+                Prenom = Input.Read<string>("Prenom"),
+                CarteFidelite = Input.Read<bool>("Avez vous une carte de fidelité: 0 (False) ou 1 (True) :"),
+                Societe = Input.Read<string>("Nom de société (si renseigné) :")
+            };
+
+            if (Metier.Enregister(cli))
+            {
+                Output.WriteLine(ConsoleColor.Green, "Enregistrement du nouveau client avec succès");
+
+                //Saisie adresse client si le client est enregistré avec succes
+                AdresseBOL ad = new AdresseBOL();
+                Output.WriteLine("Voulez-vous entrer l'adresse du nouveau client : O/N");
+                string choix = Console.ReadLine();
+                if (choix == "O")
+                {
+                    Output.WriteLine("Veuillez saisir les informations suivantes :\n");
+                    ad.RueEtComplement = Input.Read<string>("Rue et complément :");
+                    ad.CodePostal = Input.Read<string>("Code Postal:");
+                    ad.Ville = Input.Read<string>("Ville :");
+                }
+                else if (choix == "N") { }
+                else
+                {
                     Output.WriteLine("Erreur de saisie!");
-                    break;
-            }
+                }
 
-
-            Output.WriteLine("Saisissez les informations du nouveau client :");
-            ClientBOL cli = new ClientBOL();
-            cli.Civilite = Input.Read<string>("Civilité (M/Mlle/Mme) :");
-            cli.Nom = Input.Read<string>("Nom :");
-            cli.Prenom = Input.Read<string>("Prenom");
-            cli.CarteFidelite = Input.Read<bool>("Avez vous une carte de fidelité: 0 (False) ou 1 (True) :");
-            cli.Societe = Input.Read<string>("Nom de société (si renseigné) :");
-
-            Metier.Enregister(cli);
-            AdresseBOL ad = new AdresseBOL();
-            //Saisie adresse client
-            Output.WriteLine("Voulez-vous entrer l'adresse du nouveau client : O/N");
-            string choix = Console.ReadLine();
-            if (choix == "O")
-            {
-                Output.WriteLine("Veuillez saisir les informations suivantes :");
-                ad.RueEtComplement = Input.Read<string>("Rue et complément :");
-                ad.CodePostal = Input.Read<string>("Code Postal:");
-                ad.Ville = Input.Read<string>("Ville :");
-
-            }
-            else if (choix == "N")
-            {
-
+                if (Metier.Enregister(ad))
+                    Output.WriteLine(ConsoleColor.Green, "Enregistrement du nouveau client avec succès");
+                else
+                    Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement de l'adresse!!!");
 
             }
             else
-            {
-                Output.WriteLine("Erreur de saisie!");
-            }
+                Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement du client!!!");
 
-            if (Metier.Enregister(ad))
-                Output.WriteLine(ConsoleColor.Blue, "Enregistrement du nouveau client avec succès");
-            else
-                Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
+           
         }
+
         //----------------------------------------------------------------------
         //4-Ajouter un N° de téléphone ou une adresse email
         public void ModifClient()
@@ -137,8 +126,7 @@ namespace UIL
             int saisieId = Input.Read<int>("Veuillez saisir l'identifiant du client: ");
 
             //Saisie N° de teléphone 
-            Output.WriteLine("Voulez-vous entrer un N° de teléphone : O/N");
-            string choixTel = Console.ReadLine();
+            string choixTel = Input.Read<string>("Voulez-vous entrer un N° de teléphone : O/N");
 
             if (choixTel == "O")
             {
@@ -147,21 +135,25 @@ namespace UIL
                 tel.Numero= Input.Read<string>("Numero de téléphone :");
                 string saisieCT = Input.Read<string>("Fixe (F) ou Mobile (M) :");
                 bool saisie = false;
-                switch (saisieCT)
+
+                do
                 {
-                    case "F":
-                        saisie = true;
-                        tel.CodeType = saisieCT;
-                        break;
-                    case "M":
-                        saisie = true;
-                        tel.CodeType = saisieCT;
-                        break;
-                    default:
-                        Output.WriteLine("Erreur de saisie!");
-                        break;
-                }
-                tel.Pro= Input.Read<bool>("Teléphone professionnel?: Oui (True) ou Non (False)");
+                    switch (saisieCT)
+                    {
+                        case "F":
+                            saisie = true;
+                            tel.CodeType = saisieCT;
+                            break;
+                        case "M":
+                            saisie = true;
+                            tel.CodeType = saisieCT;
+                            break;
+                        default:
+                            Output.WriteLine("Erreur de saisie!");
+                            break;
+                    }
+                } while (!saisie);      // repete tant que la saisie est fausse
+                tel.Pro = Input.Read<bool>("Teléphone professionnel?: Oui (True) ou Non (False)");
 
                 //Enregistrement teléphone
                 if (Metier.Enregister(tel, saisieId))
@@ -169,23 +161,19 @@ namespace UIL
                 else
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
             }
-            else
-            {
-
-            }
 
 
             //Saisie Email 
-            Output.WriteLine("Voulez-vous entrer un email : O/N");
-            string choixEmail = Console.ReadLine();
+            string choixEmail = Input.Read<string>("Voulez-vous entrer un email : O/N");
 
             if (choixEmail == "O")
             {
-                Output.WriteLine("Veuillez saisir l'email :");
-                EmailBOL em = new EmailBOL();
-                em.AdresseMail = Input.Read<string>("Email :");
-                em.Pro= Input.Read<bool>("Adresse Email professionnel?: Oui (True) ou Non (False)");
-
+                Output.WriteLine("Veuillez saisir l'email `\n");
+                EmailBOL em = new EmailBOL
+                {
+                    AdresseMail = Input.Read<string>("Email :"),
+                    Pro = Input.Read<bool>("Adresse Email professionnel?: Oui (True) ou Non (False)")
+                };
 
                 //Enregistrement Email
                 if (Metier.Enregister(em, saisieId))
@@ -194,15 +182,10 @@ namespace UIL
                     Output.WriteLine(ConsoleColor.Red, "Erreur d'enregistrement!!!");
 
             }
-            else
-            {
-
-            }
-
         }
+
         //----------------------------------------------------------------------
         //5-Supprimer un client
-
         public void SupClient()
         {
             int id = Input.Read<int>("Id du client à supprimer :");
@@ -223,7 +206,6 @@ namespace UIL
         }
         //----------------------------------------------------------------------
         //6-Sauvegarder la liste des clients
-
         private void SauveClient()
         {
             Console.WriteLine("Exportation de la liste des clients en format XML");
@@ -232,6 +214,5 @@ namespace UIL
             else
                 Output.WriteLine(ConsoleColor.Red, "Erreur de l'opération Export!!!");
         }
-
     }
 }
