@@ -68,9 +68,9 @@ namespace DAL
 
 
         // -----------------------------GESTION DES FACTURES--------------------------
-        public static List<Facture> ChercheFactureClient(int id)
+        public static List<Facture> ChercheFactureClient(DateTime saisieDate, int saisieClient)
         {
-            return DonneesClient.Instance.GetFacture(id);
+            return DonneesClient.Instance.GetFacture(saisieDate, saisieClient);
         }
 
 
@@ -254,9 +254,9 @@ namespace DAL
         // Affiche la liste des factures d'un client
 
 
-        public List<Facture> GetFacture(int id)
+        public List<Facture> GetFacture(DateTime saisieDate, int saisieClient)
         {
-            return DFacture.Where(f => f.IdClient == id).FirstOrDefault();
+            return DFacture.Where(f => f.IdClient == saisieClient && (f.DateFacture >= saisieDate && f.DateFacture < saisieDate.AddYears(1))).ToList();
         }
     }
 

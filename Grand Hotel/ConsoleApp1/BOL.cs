@@ -21,7 +21,7 @@ namespace BOL
             List<Client> liste = BDD.AfficheListeClient();
             List<ClientBOL> listeBOL = new List<ClientBOL>();
 
-             foreach(Client c in liste)
+            foreach (Client c in liste)
             {
                 ClientBOL client1 = new ClientBOL();
                 client1.Id = c.Id;
@@ -50,6 +50,7 @@ namespace BOL
 
             return adressebol;
         }
+
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
         public static List<TelephoneBOL> GetTel(int id)
@@ -125,13 +126,13 @@ namespace BOL
         //         Numero = c.Numero,
         //         Pro = c.Pro,
         //         CodeType = c.CodeType
-               
+
         //};
 
         //    return BDD.EnregistreTelephone(tele);
         //}
 
-        public static bool Enregister(TelephoneBOL c, int saisieId)      
+        public static bool Enregister(TelephoneBOL c, int saisieId)
         {
             Telephone tele = new Telephone
             {
@@ -205,16 +206,22 @@ namespace BOL
 
         //-----------------------------GESTION DES FACTURES--------------
         // Cherche les factures  selon l'id et renvoie la liste des adresses de ce dernier
-        public static AdresseBOL GetFacture(int id)
+
+        public static List<FactureBOL> GetFacture(DateTime saisieDate, int saisieClient)
         {
-            DAL.Facture facture = BDD.ChercheFactureClient(id);
-            FactureBOL facturebol = new factureBOL();
+            List<Facture> facture = BDD.ChercheFactureClient(saisieDate, saisieClient);
+            List<FactureBOL> facturebol = new List<FactureBOL>();
 
-            adressebol.RueEtComplement = adresse.Rue + "\t" + adresse.Complement;
-            adressebol.CodePostal = adresse.CodePostal;
-            adressebol.Ville = adresse.Ville;
+            foreach (Facture f in facture)
+            {
+                FactureBOL facture1 = new FactureBOL();
+                facture1.Id = f.Id;
+                facture1.Datefacture = f.DateFacture;
+                facture1.DatePaiement = f.DatePaiement;
 
-            return adressebol;
+                facturebol.Add(facture1);
+            }
+            return facturebol;
         }
 
 
