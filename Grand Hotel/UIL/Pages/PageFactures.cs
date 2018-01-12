@@ -70,8 +70,10 @@ namespace UIL
             {
                 FactureBOL nouvelleFacture = new FactureBOL();
 
-
+                List<ClientBOL> clients = Metier.GetClients();
+                ConsoleTable.From(clients, "clients").Display("Clients");
                 nouvelleFacture.IdClient = Input.Read<int>("Quel est l'id du client");
+
                 nouvelleFacture.Datefacture = Input.Read<DateTime>("Quel est la date de la facture");
                 if (Input.Read<bool>("Le client a deja payé ? ( Oui : true / Non : false )"))
                 {

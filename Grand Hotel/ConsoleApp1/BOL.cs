@@ -71,6 +71,11 @@ namespace BOL
             return listeBOL;
         }
 
+        public static List<LigneFactureBOL> GetLignesFactureID(int saisieID)
+        {
+            throw new NotImplementedException();
+        }
+
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
         public static List<EmailBOL> GetEmail(int id)
         {
@@ -158,6 +163,11 @@ namespace BOL
             };
 
             return BDD.EnregistreEmail(email);
+        }
+
+        public static void SaisirFacture(FactureBOL nouvelleFacture)
+        {
+            throw new NotImplementedException();
         }
 
         public static void SupprimerCLient(int id)
