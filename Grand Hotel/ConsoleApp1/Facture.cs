@@ -12,7 +12,7 @@ namespace BOL
         public int Id { get; set; }
         public int IdClient { get; set; }
         public DateTime Datefacture { get; set; }
-        public DateTime DatePaiement { get; set; }
+        public Nullable<DateTime> DatePaiement { get; set; }
         public string CodeModePaiement { get; set; }        // peut etre nul
 
         public List<LigneFactureBOL> ListeFacture { get; set; }
