@@ -266,15 +266,37 @@ namespace BOL
         }
 
         //Saisir les lignes d'une facture donnée
-        public static void SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
+        public static bool SaisirLigneFacture(LigneFactureBOL nouvelleLigneFacture, int saisieIDfacture)
         {
-            throw new NotImplementedException();
+            LigneFacture lf = new LigneFacture
+            {
+               NumLigne = nouvelleLigneFacture.NumLigne,
+               Quantite = nouvelleLigneFacture.Quantite,
+               MontantHT = nouvelleLigneFacture.MontantHT,
+               TauxTVA = nouvelleLigneFacture.TauxTVA,
+               TauxReduction = nouvelleLigneFacture.TauxReduction
+            };
+
+            return BDD.EnregistrerLigne(lf);
         }
 
-
+        //Mettre à jour la date et le mode de paiement d'une facture
         public static void MiseAJourPaiement(int saisieID, DateTime saisieDatepaiement, string saisieMode)
         {
             throw new NotImplementedException();
         }
     }
 }
+//public static bool Enregister(TelephoneBOL c, int saisieId)
+//{
+//    Telephone tele = new Telephone
+//    {
+//        Numero = c.Numero,
+//        Pro = c.Pro,
+//        CodeType = c.CodeType,
+//        IdClient = saisieId
+
+//    };
+
+//    return BDD.EnregistreTelephone(tele);
+//}

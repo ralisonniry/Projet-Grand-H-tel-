@@ -83,6 +83,11 @@ namespace DAL
             return DonneesClient.Instance.SaveFacture (nouvelleFacture);
         }
 
+        public static bool EnregistrerLigne(LigneFacture lf)
+        {
+            return DonneesClient.Instance.SaveLigne (lf);
+        }
+
         // -----------------------------GESTION DES FACTURES--------------------------
 
     }
@@ -280,6 +285,20 @@ namespace DAL
             try
             {
                 DFacture.Add(nouvelleFacture);
+                SaveChanges();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        internal bool SaveLigne(LigneFacture lf)
+        {
+            try
+            {
+                DLigneFacture.Add(lf);
                 SaveChanges();
             }
             catch (Exception)
