@@ -17,9 +17,6 @@ namespace BOL
     }
 
 
-
-
-
     public class ChambreBOL
     {
         public int Numero { get; set; }
@@ -37,6 +34,30 @@ namespace BOL
         public List<ReservationBOL> ReservationDeLaChambre { get; set; }       // reservations effectuées pour cette chambre
 
     }
+
+    public class TauxReservation
+    {
+        public int Mois { get; set; }
+        public int Taux { get; set; }
+
+    }
+
+    public class NbrQuotidien
+    {
+
+        public int Mois { get; set; }
+        public int Nbrclient { get; set; }
+
+
+    }
+
+    public class ChiffreAffaire
+    {
+
+        public int TrimerstreAnnee { get; set; }
+        public int Chiffre { get; set; }
+    }
+
 
 
 

@@ -33,7 +33,7 @@ namespace UIL
         public void AfficherClients()
         {
             _clients = Metier.GetClients();
-            ConsoleTable.From(_clients, "clients").Display("Clients");
+            ConsoleTable.From(_clients, "clients sans Mobile").Display("Clients");
         }
 
         //----------------------------------------------------------------------
