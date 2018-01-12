@@ -210,19 +210,14 @@ namespace UIL
             {
                 Metier.SupprimerCLient(id);
             }
-            catch (SqlException e)
+            catch ()
             {
-                GérerErreurSql(e);
+                GérerErreurSql();
             }
         }
 
-        private void GérerErreurSql(SqlException ex)
+        private void GérerErreurSql()
         {
-            if (ex.Number == 547)
-                Output.WriteLine(ConsoleColor.Red,
-                    "Le produit ne peut pas être supprimé car il est référencé par une facture et à une occupation de chambre");
-            else
-                throw ex;
         }
         //----------------------------------------------------------------------
         //6-Sauvegarder la liste des clients
