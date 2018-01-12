@@ -93,6 +93,11 @@ namespace DAL
             DonneesClient.Instance.SaveMAJ(facture);
         }
 
+        public static List<Facture> AfficheListeFacture(int saisieClient)
+        {
+            return DonneesClient.Instance.GetListeFacture(saisieClient);
+        }
+
         // -----------------------------GESTION DES FACTURES--------------------------
 
     }
@@ -273,8 +278,6 @@ namespace DAL
 
         // -----------------------------GESTION DES FACTURES--------------------------
         // Affiche la liste des factures d'un client
-
-
         public List<Facture> GetFacture(DateTime saisieDate, int saisieClient)
         {
             DateTime saisiePlusAnnee = saisieDate.AddYears(1);
@@ -335,6 +338,11 @@ namespace DAL
             {
                 throw;
             }
+        }
+
+        internal List<Facture> GetListeFacture(int saisieClient)
+        {
+            return DFacture.Where(f => f.IdClient == saisieClient).ToList();
         }
     }
 }

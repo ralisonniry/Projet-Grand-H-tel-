@@ -172,6 +172,8 @@ namespace BOL
             BDD.SupprimerLeClient(id);
         }
 
+
+        //Exporter la liste des clients au format XML
         public static bool ExporterXml()
         {
             List<Client> listeDAL = BDD.AfficheListeClient();
@@ -267,7 +269,7 @@ namespace BOL
                 CodeModePaiement = nouvelleFacture.CodeModePaiement
             };
 
-             BDD.EnregistrerFacture(nouvelleFacture1);
+            BDD.EnregistrerFacture(nouvelleFacture1);
         }
 
         //Saisir les lignes d'une facture donnée
@@ -275,12 +277,12 @@ namespace BOL
         {
             LigneFacture lf = new LigneFacture
             {
-               IdFacture = saisieIDfacture,
-               Quantite = nouvelleLigneFacture.Quantite,
-               MontantHT = nouvelleLigneFacture.MontantHT,
-               TauxTVA = nouvelleLigneFacture.TauxTVA,
-               TauxReduction = nouvelleLigneFacture.TauxReduction
-               
+                IdFacture = saisieIDfacture,
+                Quantite = nouvelleLigneFacture.Quantite,
+                MontantHT = nouvelleLigneFacture.MontantHT,
+                TauxTVA = nouvelleLigneFacture.TauxTVA,
+                TauxReduction = nouvelleLigneFacture.TauxReduction
+
             };
 
             BDD.EnregistrerLigne(lf);
@@ -301,9 +303,39 @@ namespace BOL
         }
 
         //Exporter factures en XML
-        public static void EnregistreFacturesXML(int saisieClient)
+        public static bool EnregistreFacturesXML(int saisieClient)
         {
-            throw new NotImplementedException();
+            List<Facture> listeFacture = BDD.AfficheListeFacture(saisieClient);
+
+
+            List<FactureBOL> factureBOL = new List<FactureBOL>();
+            foreach (Facture f in listeFacture)
+            {
+                FactureBOL facture1 = new FactureBOL
+                {
+                    Id = f.Id,
+                    IdClient = f.IdClient,
+                    Datefacture = f.DateFacture,
+                    DatePaiement = f.DatePaiement,
+                    CodeModePaiement = f.CodeModePaiement,
+                    MontantFacture = f.LigneFacture
+                };
+
+                factureBOL.Add(facture1);
+            }
+
+
+            XmlSerializer xmlserialise = new XmlSerializer(typeof(List<FactureBOL>),
+                                         new XmlRootAttribute("ListeFactures"));
+
+            using (var sw = new StreamWriter(@"..\..\XML_Liste_Facture.xml"))
+            {
+
+                xmlserialise.Serialize(sw, factureBOL);
+            }
+            return true;
+
+
         }
     }
 }
