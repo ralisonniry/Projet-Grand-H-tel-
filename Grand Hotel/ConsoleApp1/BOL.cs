@@ -71,10 +71,6 @@ namespace BOL
             return listeBOL;
         }
 
-        public static List<LigneFactureBOL> GetLignesFactureID(int saisieID)
-        {
-            throw new NotImplementedException();
-        }
 
         // Cherche le client selon l'id et envoie l'adresse de ce dernier
         public static List<EmailBOL> GetEmail(int id)
@@ -226,14 +222,21 @@ namespace BOL
             {
                 FactureBOL facture1 = new FactureBOL();
                 facture1.Id = f.Id;
+                facture1.IdClient = f.IdClient;
                 facture1.Datefacture = f.DateFacture;
                 facture1.DatePaiement = f.DatePaiement;
+                facture1.CodeModePaiement= f.CodeModePaiement;
 
                 facturebol.Add(facture1);
             }
             return facturebol;
         }
 
+        public static List<LigneFactureBOL> GetLignesFactureID(int saisieID)
+        {
+            List<LigneFacture> ligneFacture = BDD.ChercheLigneFacture(saisieID);
+            List<FactureBOL> facturebol = new List<FactureBOL>();
+        }
 
 
 
