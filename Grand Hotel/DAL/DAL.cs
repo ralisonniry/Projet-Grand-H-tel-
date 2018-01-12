@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Runtime.Remoting.Contexts;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace DAL
 {
@@ -57,10 +58,27 @@ namespace DAL
         {
             DonneesClient.Instance.SupprimeClient(id);
         }
+
+        public static bool ExporteXMLClient()
+        {
+            List<Client> listeDAL = AfficheListeClient();
+
+            XmlSerializer xmlserialise = new XmlSerializer(typeof(List<Client>),
+                                         new XmlRootAttribute("ListeClients"));
+
+            using (var sw = new StreamWriter(@"..\..\XML_Liste_Client.xml"))
+            {
+
+                xmlserialise.Serialize(sw, listeDAL);
+                
+
+            }
+            return true;
+        }
     }
 
 
-    public class DonneesClient : Context
+    public class DonneesClient : DbContext
     {
 
 
