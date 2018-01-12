@@ -42,7 +42,7 @@ namespace UIL
                 List<FactureBOL> factures = Metier.GetFacture(saisieDate, saisieClient);
                 ConsoleTable.From(factures, "Liste des factures du client" + saisieClient + " jusqu'a 1 an, à partir de " + saisieDate).Display("Liste des factures");
 
-                passer = Input.Read<bool>("Voulez-vous enore voir d'autres factures ? ( Oui : true / Non : false )");
+                passer = Input.Read<bool>("Voulez-vous encore voir d'autres factures ? ( Oui : true / Non : false ) \n");
 
             } while (passer);
         }
@@ -53,12 +53,12 @@ namespace UIL
             bool passer = false;
             do
             {
-                int saisieID = Input.Read<int>("De quelle facture voulez vous voir les lignes de factures ? ( Id de la facture )");
+                int saisieID = Input.Read<int>("De quelle facture voulez vous voir les lignes de factures ? ( Id de la facture )\n");
 
                 List<LigneFactureBOL> lignefactures = Metier.GetLignesFactureID(saisieID);
                 ConsoleTable.From(lignefactures, "Ligne de la facture " + saisieID).Display("Ligne de la facture " + saisieID);
 
-                passer = Input.Read<bool>("Voulez-vous enore voir d'autres factures ? (Oui : true / Non ; false");
+                passer = Input.Read<bool>("Voulez-vous encore voir d'autres factures ? (Oui : true / Non : false )\n");
 
             } while (passer);
 
@@ -123,7 +123,7 @@ namespace UIL
                     Console.WriteLine("Erreur..." + e);
                 }
 
-                passer = Input.Read<bool>("Voulez-vous enore saisir d'autres factures ? (Oui : true / Non ; false");
+                passer = Input.Read<bool>("Voulez-vous encore saisir d'autres factures ? (Oui : true / Non ; false \n");
 
             } while (passer);
         }
@@ -148,14 +148,14 @@ namespace UIL
                 try
                 {
                     Metier.SaisirLigneFacture(nouvelleLigneFacture, saisieIDfacture);
-                    Console.WriteLine("Ligne de facture saisie avec succés !");
+                    Console.WriteLine("Ligne de facture saisie avec succés !\n");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Erreur..." + e);
                 }
 
-                passer = Input.Read<bool>("Voulez-vous enore saisir d'autres ligne  pour cette facture ? (Oui : true / Non ; false");
+                passer = Input.Read<bool>("Voulez-vous encore saisir d'autres ligne  pour cette facture ? (Oui : true / Non :false ) \n");
 
             } while (passer);
         }
@@ -178,7 +178,7 @@ namespace UIL
                         try
                         {
                             Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
-                            Console.WriteLine("Validé !");
+                            Console.WriteLine("Validé !\n");
                         }
                         catch (Exception e) { Console.WriteLine("Erreur..." + e); }
                         modepaiment = true;
@@ -187,7 +187,7 @@ namespace UIL
                         try
                         {
                             Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
-                            Console.WriteLine("Validé !");
+                            Console.WriteLine("Validé !\n");
                         }
                         catch (Exception e) { Console.WriteLine("Erreur..." + e); }
                         modepaiment = true;
@@ -196,7 +196,7 @@ namespace UIL
                         try
                         {
                             Metier.MiseAJourPaiement(saisieID, saisieDatepaiement, saisieMode);
-                            Console.WriteLine("Validé !");
+                            Console.WriteLine("Validé !\n");
                         }
                         catch (Exception e) { Console.WriteLine("Erreur..." + e); }
                         modepaiment = true;
@@ -219,7 +219,7 @@ namespace UIL
             try
             {
                 Metier.EnregistreFacturesXML(saisieClient);
-                Console.WriteLine("Validé !");
+                Console.WriteLine("Validé !\n");
             }
             catch (Exception e) { Console.WriteLine("Erreur..." + e); }
         }
