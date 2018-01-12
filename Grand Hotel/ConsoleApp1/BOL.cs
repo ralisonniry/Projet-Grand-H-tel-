@@ -270,15 +270,17 @@ namespace BOL
         {
             LigneFacture lf = new LigneFacture
             {
-               NumLigne = nouvelleLigneFacture.NumLigne,
+               IdFacture = saisieIDfacture,
                Quantite = nouvelleLigneFacture.Quantite,
                MontantHT = nouvelleLigneFacture.MontantHT,
                TauxTVA = nouvelleLigneFacture.TauxTVA,
                TauxReduction = nouvelleLigneFacture.TauxReduction
+               
             };
 
             return BDD.EnregistrerLigne(lf);
         }
+
 
         //Mettre à jour la date et le mode de paiement d'une facture
         public static void MiseAJourPaiement(int saisieID, DateTime saisieDatepaiement, string saisieMode)
