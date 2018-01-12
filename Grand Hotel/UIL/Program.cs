@@ -18,7 +18,7 @@ namespace UIL
             Page accueil = new PageAccueil();
             app.AddPage(accueil);
             app.AddPage(new PageClients());
-            //app.AddPage(new PageFactures());
+            app.AddPage(new PageFactures());
             //app.AddPage(new PageResultats());
 
             // Affichage de la page d'accueil
