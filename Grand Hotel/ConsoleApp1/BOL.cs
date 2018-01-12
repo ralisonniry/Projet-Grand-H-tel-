@@ -14,14 +14,14 @@ namespace BOL
     public static class Metier
     {
 
-
+        #region ClientService
         // Envoie la liste de tous les clients
         public static List<ClientBOL> GetClients()
         {
-            List<DAL.Client> liste = BDD.AfficheListeClient();
+            List<Client> liste = BDD.AfficheListeClient();
             List<ClientBOL> listeBOL = new List<ClientBOL>();
 
-             foreach(var c in liste)
+             foreach(Client c in liste)
             {
                 ClientBOL client1 = new ClientBOL();
                 client1.Id = c.Id;
@@ -200,5 +200,15 @@ namespace BOL
 
 
         }
+
+        #endregion
+
+
+
+
+
+
+
+
     }
 }
