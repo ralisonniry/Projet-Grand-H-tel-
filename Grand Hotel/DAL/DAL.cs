@@ -195,9 +195,32 @@ namespace DAL
             try// faudra effacer les adresse, num tel etc, Ssi !!!! pas de reservation
             {
                 Client c = DClient.Find(id);
-                if (c != null) 
-                DClient.Remove(c);
+                if (c != null) {
+                    
+                    //Enleve l'adresse reliée
+                    Adresse a = DAdresse.Find(c.Id);
+                    if (a != null)
+                        DAdresse.Remove(a);
+
+                    //Enleve les telephones reliées
+                    List<Telephone> tel = DTelephone.Where(t => t.IdClient == id).ToList();
+                    if (a != null)
+                        foreach(var t in tel)
+                        DTelephone.Remove(t);
+
+                    //Enleve les telephones reliées
+                    List<Email> email = DEmail.Where(t => t.IdClient == id).ToList();
+                    if (a != null)
+                        foreach (var t in email)
+                            DEmail.Remove(t);
+
+
+                    DClient.Remove(c);
+
                 SaveChanges();
+
+
+                }
 
             }
             catch(Exception)
